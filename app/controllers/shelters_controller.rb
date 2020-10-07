@@ -1,7 +1,7 @@
 class SheltersController < ApplicationController
   # this will change after I create a shelter object and show.html.erb will be setup like: shelter.id[name], shelter.id[address], etc.
   def index
-    @shelters = ["shelter1", "shelter2"]#Shelter.all
+    @shelters = Shelter.all
   end
 
   def new
@@ -16,9 +16,7 @@ class SheltersController < ApplicationController
       state: params[:shelter][:state],
       zip: params[:shelter][:zip]
     })
-
     shelter.save
-
     redirect_to '/shelters'
   end
 
