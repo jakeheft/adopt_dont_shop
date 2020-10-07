@@ -20,8 +20,7 @@ class SheltersController < ApplicationController
     redirect_to '/shelters'
   end
 
-  # def show
-  #   # binding.pry
-  #   # @shelter = Shelter.find(params[:id])
-  # end
+  def show
+    @shelter = Shelter.find(params[:id])
+  end
 end
