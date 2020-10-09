@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# When I visit '/shelters'
-# Then I see the name of each shelter in the system
 describe "When i visit '/shelters'" do
   it "Then I see the name of each shelter in the system" do
     shelter_1 = Shelter.create(
