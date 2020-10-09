@@ -47,10 +47,10 @@ describe "When I visit a shelter show page I see a link to delete the shelter" d
 
     visit "/shelters/#{shelter_2.id}"
 
-    click_link("Delete Shelter")
+    click_button
 
     expect(current_path).to eq("/shelters")
-    expect(page).to has_no_content("Happy Animals")
+    expect(page).to have_no_content("Happy Animals")
     expect(page).to have_content("Denver Shelter")
   end
 end
