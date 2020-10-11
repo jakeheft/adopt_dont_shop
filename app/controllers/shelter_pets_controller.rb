@@ -22,7 +22,6 @@ class ShelterPetsController < ApplicationController
       shelter_id: params[:shelter_id]
       })
       pet.save
-      # require "pry"; binding.pry
       redirect_to "/shelters/#{shelter.id}/pets"
   end
 end

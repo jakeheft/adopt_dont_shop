@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit '/shelters/:shelter_id/pets'
-# Then I see each Pet that can be adopted from that Shelter with that shelter_id including the Pet's:
-# - image
-# - name
-# - approximate age
-# - sex
-
 RSpec.describe "As a visitor" do
   describe "When I visit '/shelters/:shelter_id/pets'" do
     it "I see an adoptable pet with its info" do
