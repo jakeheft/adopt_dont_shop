@@ -5,9 +5,9 @@
 <h1>Pets</h1>
 
 <% @pets.each do |pet| %>
-  <img src="<%= pet.image %>" style="height:250px; width:300px;">
-  <h4><%= "#{pet.name.capitalize}" %></h4>
+  <a href="/pets/<%= "#{pet.id}" %>"><img src="<%= pet.image %>" style="height:250px; width:300px;"></a>
+  <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
   <p><%= "Approximate Age: #{pet.age}" %></p>
   <p><%= "Sex: #{pet.sex}" %></p>
-  <p><%= "Shelter: #{pet.shelter_name}" %></p><br><br>
+  <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter_name}" %></a></p><br><br>
 <% end %>
