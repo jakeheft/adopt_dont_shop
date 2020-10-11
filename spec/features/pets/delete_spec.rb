@@ -10,7 +10,7 @@ RSpec.describe "As a visitor" do
           city: "Denver",
           state: "CO",
           zip: "80211")
-        pet_1 =Pet.create(
+        pet_1 = Pet.create(
           image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
           name: "Cosmo",
           description: "Cute, cuddly, awesome",
@@ -19,8 +19,8 @@ RSpec.describe "As a visitor" do
           status: "Adoptable",
           shelter_name: shelter.name,
           shelter: shelter)
-        pet_2 =Pet.create(
-          image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        pet_2 = Pet.create(
+          image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80",
           name: "Frank",
           description: "Mean",
           age: "3",
