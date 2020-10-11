@@ -1,9 +1,13 @@
+<header>
+  <a href="/shelters">Go to Shelters</a>
+</header>
+
 <h1>Pets</h1>
 
 <% @pets.each do |pet| %>
   <img src="<%= pet.image %>" style="height:250px; width:300px;">
-  <p><%= "Name: #{pet.name.capitalize}" %></p>
+  <h4><%= "#{pet.name.capitalize}" %></h4>
   <p><%= "Approximate Age: #{pet.age}" %></p>
   <p><%= "Sex: #{pet.sex}" %></p>
-  <p><%= "Shelter: #{pet.shelter_name}" %></p>
+  <p><%= "Shelter: #{pet.shelter_name}" %></p><br><br>
 <% end %>
