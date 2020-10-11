@@ -13,7 +13,7 @@ class PetsController < ApplicationController
 
   def update
     pet = Pet.find(params[:id])
-    pet.update!({
+    pet.update({
       image: params[:pet_image],
       name: params[:pet_name],
       description: params[:pet_description],
