@@ -11,7 +11,7 @@ describe "When I visit a shelter show page I see a link to update" do
 
     visit "shelters/#{shelter.id}"
 
-    click_link
+    click_link "Edit"
     expect(current_path).to eq("/shelters/#{shelter.id}/edit")
     fill_in "shelter[name]", with: "Denver Shelter South"
     expect(find_field('shelter[name]').value).to eq"Denver Shelter South"
@@ -33,7 +33,7 @@ describe "When I visit a shelter show page I see a link to update" do
 
     fill_in "shelter[name]", with: "Denver Shelter South"
 
-    click_button
+    click_button "Submit"
 
     expect(current_path).to eq("/shelters/#{shelter.id}")
     expect(page).to have_content("#{shelter.name}")

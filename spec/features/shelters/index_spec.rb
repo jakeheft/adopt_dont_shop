@@ -43,12 +43,6 @@ describe "As a visitor" do
   end
 end
 
-# As a visitor
-# When I visit the shelter index page
-# Next to every shelter, I see a link to delete that shelter
-# When I click the link
-# I am returned to the Shelter Index Page where I no longer see that shelter
-
 describe "As a visitor" do
   describe "When I visit the shelter index page I see a delete link next to each shelter" do
     it "When I click the link I'm returned to '/shelter' and that shelter is gone" do

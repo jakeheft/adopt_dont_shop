@@ -9,5 +9,6 @@
   <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
   <p><%= "Approximate Age: #{pet.age}" %></p>
   <p><%= "Sex: #{pet.sex}" %></p>
-  <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter_name}" %></a></p><br><br>
+  <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter_name}" %></a></p>
+  <a href="/pets/<%= "#{pet.id}" %>">Edit Pet</a><br><br><br><br>
 <% end %>

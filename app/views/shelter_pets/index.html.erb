@@ -13,5 +13,6 @@
   <a href="/pets/<%= "#{pet.id}" %>"><img src="<%= pet.image %>" style="height:250px; width:300px;"></a>
   <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
   <p>Approximate Age: <%= pet.age %></p>
-  <p>Sex: <%= pet.sex %></p><br><br>
+  <p>Sex: <%= pet.sex %></p>
+  <a href="/pets/<%= "#{pet.id}" %>">Edit Pet</a><br><br><br><br>
 <% end %>
