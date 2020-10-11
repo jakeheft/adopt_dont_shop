@@ -1,4 +1,5 @@
 <h1><%= "Pets at #{@shelter.name}" %></h1>
+<h3><%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new" %></h3><br>
 
 <% shelter_pets = @pets.select do |pet| %>
   <% pet.shelter == @shelter %>
@@ -6,7 +7,8 @@
 <% shelter_pets.each do |pet| %>
   <img src="<%= pet.image %>" style="height:250px; width:300px;">
   <p><%= pet.name %></p>
+  <p><%= pet.description %></p>
   <p><%= pet.age %></p>
   <p><%= pet.sex %></p>
-  <p><%= pet.shelter.name %></p>
+  <p><%= pet.status %></p>
 <% end %>
