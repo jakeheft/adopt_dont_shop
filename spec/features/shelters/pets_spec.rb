@@ -22,15 +22,17 @@ RSpec.describe "As a visitor" do
         name: "Cosmo",
         age: "8",
         sex: "Male",
+        shelter_name: shelter.name,
         shelter: shelter)
 
         visit "/shelters/#{shelter.id}/pets"
-        
+
+        expect(page).to have_content("Pets at #{shelter.name}")
         expect(page).to have_xpath("//img[contains(@src, '#{pet.image}')]")
         expect(page).to have_content(pet.name)
         expect(page).to have_content(pet.age)
         expect(page).to have_content(pet.sex)
-        expect(page).to have_content(pet.shelter.name)
+        expect(page).to have_content(pet.shelter_name)
     end
   end
 end

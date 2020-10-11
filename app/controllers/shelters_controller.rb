@@ -63,11 +63,13 @@ class SheltersController < ApplicationController
       description: params[:pet_description],
       age: params[:pet_age],
       sex: params[:pet_sex],
+      shelter_name: shelter.name,
       shelter: shelter,
       status: "Adoptable",
       shelter_id: params[:shelter_id]
       })
       pet.save
+      # require "pry"; binding.pry
       redirect_to "/shelters/#{shelter.id}/pets"
   end
 end

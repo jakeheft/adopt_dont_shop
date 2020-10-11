@@ -29,6 +29,7 @@ RSpec.describe "As a visitor" do
 
           expect(current_path).to eq("/shelters/#{shelter.id}/pets")
 
+          expect(page).to have_content("Pets at #{shelter.name}")
           expect(page).to have_xpath("//img[contains(@src, 'https://images.unsplash.com/photo-1524511751214-b0a384dd9afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2767&q=80')]")
           expect(page).to have_content("Charlie")
           expect(page).to have_content("Wiley dog who loves to fetch")
