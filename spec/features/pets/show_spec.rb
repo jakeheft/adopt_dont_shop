@@ -23,6 +23,7 @@ RSpec.describe "As a visitor" do
         name: "Cosmo",
         age: "8",
         sex: "Male",
+        status: "Adoptable",
         shelter: shelter)
 
       visit "/pets/#{pet.id}"

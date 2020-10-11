@@ -22,6 +22,7 @@ RSpec.describe "As a visitor" do
         name: "Cosmo",
         age: "8",
         sex: "Male",
+        status: "Adoptable",
         shelter_name: shelter.name,
         shelter: shelter)
 
@@ -32,6 +33,7 @@ RSpec.describe "As a visitor" do
         expect(page).to have_content(pet.name)
         expect(page).to have_content(pet.age)
         expect(page).to have_content(pet.sex)
+        save_and_open_page
         expect(page).to have_content(pet.shelter_name)
     end
   end
