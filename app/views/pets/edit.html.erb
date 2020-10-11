@@ -1,3 +1,8 @@
+<header>
+  <a href="/pets">Go to Pets</a>
+  <a href="/shelters">Go to Shelters</a>
+</header>
+
 <h1><%= "Update #{@pet.name}" %></h1>
 
 <%= form_tag "/pets/#{@pet.id}", method: :patch do %>

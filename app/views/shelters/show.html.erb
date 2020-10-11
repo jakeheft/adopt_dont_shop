@@ -1,5 +1,11 @@
+<header>
+  <a href="/pets">Go to Pets</a>
+  <a href="/shelters">Go to Shelters</a>
+</header>
+
 <h1><%= @shelter.name %></h1>
 
+<h2><a href="/shelters/<%= "#{@shelter.id}" %>/pets">See our pets!</a></h2>
 <p><%= "Name: #{@shelter.name}" %></p>
 <p><%= "Address: #{@shelter.address}" %></p>
 <p><%= "City: #{@shelter.city}" %></p>

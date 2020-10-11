@@ -10,7 +10,7 @@ RSpec.describe "When I visit a Pet Show page" do
           city: "Denver",
           state: "CO",
           zip: "80211")
-        pet =Pet.create(
+        pet = Pet.create(
           image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
           name: "Cosmo",
           description: "Cute, cuddly, awesome",

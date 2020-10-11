@@ -1,6 +1,17 @@
+<header>
+  <a href="/pets">Go to Pets</a>
+</header>
+
 <h1>Shelters</h1>
 
 <% @shelters.each do |shelter| %>
-  <h3><a href="/shelters/<%= shelter.id %>"><%= shelter.name %></a></h3>
+ <div class="row-fluid">
+   <a style="font-size:22px" href="/shelters/<%= shelter.id %>"><%= shelter.name %></a>
+   <a>&nbsp;&nbsp;&nbsp;</a>
+   <a href=<%= "/shelters/#{shelter.id}/edit" %>>Edit Shelter</a>
+   <a>&nbsp;&nbsp;</a>
+
+   <%= link_to "Delete Shelter", "/shelters/#{shelter.id}", method: :delete %>
+  </div>
 <% end %>
 <h4><a href="/shelters/new">New Shelter</a></h4>
