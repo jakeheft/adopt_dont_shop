@@ -20,7 +20,7 @@ describe "When I visit a shelter show page I see a link to update" do
     expect(find_field('shelter[state]').value).to eq"#{shelter.state}"
     expect(find_field('shelter[zip]').value).to eq"#{shelter.zip}"
   end
-  
+
   it "When I fill out the form I click the button to submit and am redirected to the Shelter's Show page where I see the shelter's updated info" do
     shelter = Shelter.create(
       name: "Denver Shelter",
@@ -32,7 +32,9 @@ describe "When I visit a shelter show page I see a link to update" do
     visit "shelters/#{shelter.id}/edit"
 
     fill_in "shelter[name]", with: "Denver Shelter South"
+
     click_button
+
     expect(current_path).to eq("/shelters/#{shelter.id}")
     expect(page).to have_content("#{shelter.name}")
     expect(page).to have_content("Denver Shelter South")
