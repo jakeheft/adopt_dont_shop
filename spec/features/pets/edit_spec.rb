@@ -35,7 +35,7 @@ RSpec.describe "When I visit a Pet Show page" do
 
         visit "/pets/#{pet.id}"
 
-        click_link
+        click_link "Update Pet"
 
         expect(current_path).to eq("/pets/#{pet.id}/edit")
 
