@@ -5,6 +5,9 @@
    <a style="font-size:22px" href="/shelters/<%= shelter.id %>"><%= shelter.name %></a>
    <a>&nbsp;&nbsp;&nbsp;</a>
    <a href=<%= "/shelters/#{shelter.id}/edit" %>>Edit Shelter</a>
+   <a>&nbsp;&nbsp;</a>
+
+   <%= link_to "Delete Shelter", "/shelters/#{shelter.id}", method: :delete %>
   </div>
 <% end %>
 <h4><a href="/shelters/new">New Shelter</a></h4>
