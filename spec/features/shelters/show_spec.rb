@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# When I visit '/shelters/:id'
-# Then I see the shelter with that id including the shelter's:
 describe "When I visit '/shelters/:id'" do
   it "I see the shelter with that id and its info" do
     shelter_1 = Shelter.create(
@@ -22,12 +20,6 @@ describe "When I visit '/shelters/:id'" do
   end
 end
 
-# When I visit a shelter show page
-# Then I see a link to delete the shelter
-# When I click the link "Delete Shelter"
-# Then a 'DELETE' request is sent to '/shelters/:id',
-# the shelter is deleted,
-# and I am redirected to the shelter index page where I no longer see this shelter
 describe "When I visit a shelter show page I see a link to delete the shelter" do
   it "When I click the link I'm redirected to '/shelters' where the shelter is gone" do
     shelter_1 = Shelter.create(

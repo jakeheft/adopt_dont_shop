@@ -1,5 +1,4 @@
 class SheltersController < ApplicationController
-  # this will change after I create a shelter object and show.html.erb will be setup like: shelter.id[name], shelter.id[address], etc.
   def index
     @shelters = Shelter.all
   end
