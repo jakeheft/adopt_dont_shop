@@ -23,3 +23,27 @@ describe "When i visit '/shelters'" do
     expect(page).to have_content("#{shelter_2.name}")
   end
 end
+
+# As a visitor
+# When I visit the shelter index page
+# Next to every shelter, I see a link to edit that shelter's info
+# When I click the link
+
+describe "As a visitor" do
+  describe "When I visit the shelter index page I see an edit link next to each shelter" do
+    it "When I click the link, I'm taken to edit the shelter" do
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211")
+
+      visit "/shelters"
+
+      click_link "Edit Shelter"
+
+      expect(current_path).to eq("/shelters/#{shelter.id}/edit")
+    end
+  end
+end
