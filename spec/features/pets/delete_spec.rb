@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit a pet show page
-# Then I see a link to delete the pet "Delete Pet"
-# When I click the link
-# Then a 'DELETE' request is sent to '/pets/:id',
-# the pet is deleted,
-# and I am redirected to the pet index page where I no longer see this pet
-
 RSpec.describe "As a visitor" do
   describe "When I visit a pet show page" do
     describe "I click a link to 'Delete Pet'" do
@@ -39,13 +31,13 @@ RSpec.describe "As a visitor" do
 
         visit "/pets/#{pet_1.id}"
 
-        click_link "Delete"
+        click_link "Delete Pet"
 
         expect(current_path).to eq("/pets")
         expect(page).to have_no_content("Cosmo")
-        expect(page).to have_no_content("Cute, cuddly, awesome")
+        expect(page).to have_no_content("8")
         expect(page).to have_content("Frank")
-        expect(page).to have_content("Mean")
+        expect(page).to have_content("3")
       end
     end
   end
