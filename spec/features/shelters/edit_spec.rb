@@ -15,13 +15,13 @@ describe "When I visit a shelter show page I see a link to update" do
 
     expect(current_path).to eq("/shelters/#{shelter.id}/edit")
 
-    fill_in "shelter[name]", with: "Denver Shelter South"
+    fill_in "shelter_name", with: "Denver Shelter South"
 
-    expect(find_field('shelter[name]').value).to eq"Denver Shelter South"
-    expect(find_field('shelter[address]').value).to eq"#{shelter.address}"
-    expect(find_field('shelter[city]').value).to eq"#{shelter.city}"
-    expect(find_field('shelter[state]').value).to eq"#{shelter.state}"
-    expect(find_field('shelter[zip]').value).to eq"#{shelter.zip}"
+    expect(find_field('shelter_name').value).to eq"Denver Shelter South"
+    expect(find_field('shelter_address').value).to eq"#{shelter.address}"
+    expect(find_field('shelter_city').value).to eq"#{shelter.city}"
+    expect(find_field('shelter_state').value).to eq"#{shelter.state}"
+    expect(find_field('shelter_zip').value).to eq"#{shelter.zip}"
   end
 
   it "When I fill out the form I click the button to submit and am redirected to the Shelter's Show page where I see the shelter's updated info" do
@@ -34,9 +34,9 @@ describe "When I visit a shelter show page I see a link to update" do
 
     visit "shelters/#{shelter.id}/edit"
 
-    fill_in "shelter[name]", with: "Denver Shelter South"
+    fill_in "shelter_name", with: "Denver Shelter South"
 
-    click_button "Submit"
+    click_button "Update Shelter"
 
     expect(current_path).to eq("/shelters/#{shelter.id}")
     expect(page).to have_content("#{shelter.name}")

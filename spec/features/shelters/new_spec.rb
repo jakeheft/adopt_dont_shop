@@ -10,11 +10,11 @@ describe "When I visit the Shelter index page and click the link for 'New Shelte
 
       expect(current_path).to eq ("/shelters/new")
 
-      fill_in "shelter[name]", with: "Ugly Pet Shelter"
-      fill_in "shelter[address]", with: "234 Rodeo Dr."
-      fill_in "shelter[city]", with: "Denver"
-      fill_in "shelter[state]", with: "CO"
-      fill_in "shelter[zip]", with: "88888"
+      fill_in "shelter_name", with: "Ugly Pet Shelter"
+      fill_in "shelter_address", with: "234 Rodeo Dr."
+      fill_in "shelter_city", with: "Denver"
+      fill_in "shelter_state", with: "CO"
+      fill_in "shelter_zip", with: "88888"
 
       click_button
 

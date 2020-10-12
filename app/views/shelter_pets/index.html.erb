@@ -1,7 +1,4 @@
-<header>
-  <a href="/pets">Go to all Pets</a>
-  <a href="/shelters">Go to Shelters</a>
-</header>
+<header><%= link_to 'Go to Shelters', '/shelters' %> <%= link_to 'Go to Pets', '/pets' %></header>
 
 <h1><%= "Pets at #{@shelter.name}" %></h1>
 <h3><%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new" %></h3><br>
