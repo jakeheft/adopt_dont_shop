@@ -36,7 +36,7 @@ class SheltersController < ApplicationController
       state: params[:shelter_state],
       zip: params[:shelter_zip]
       })
-    shelter.save
+    shelter.save # unneccessary
     redirect_to "/shelters/#{shelter.id}"
   end
 
