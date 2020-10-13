@@ -17,7 +17,6 @@ RSpec.describe "When I visit a Pet Show page" do
           age: "8",
           sex: "Male",
           status: "Adoptable",
-          shelter_name: shelter.name,
           shelter: shelter)
 
         visit "/pets/#{pet.id}"

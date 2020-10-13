@@ -14,7 +14,6 @@ RSpec.describe "As a visitor" do
         name: "Cosmo",
         age: "8",
         sex: "Male",
-        shelter_name: shelter.name,
         shelter: shelter
         )
 
@@ -24,7 +23,7 @@ RSpec.describe "As a visitor" do
         expect(page).to have_content(pet.name)
         expect(page).to have_content(pet.age)
         expect(page).to have_content(pet.sex)
-        expect(page).to have_content(pet.shelter_name)
+        expect(page).to have_content(pet.shelter.name)
     end
   end
 end
@@ -44,7 +43,6 @@ RSpec.describe "As a visitor" do
           name: "Cosmo",
           age: "8",
           sex: "Male",
-          shelter_name: shelter.name,
           shelter: shelter)
 
         visit "/pets"
@@ -87,13 +85,12 @@ describe "As a visitor" do
           age: "3",
           sex: "Male",
           status: "Adoptable",
-          shelter_name: shelter.name,
           shelter: shelter)
 
       visit "pets/"
 
       click_link("Delete Pet", match: :first)
-      
+
       expect(current_path).to eq ("/pets")
       expect(page).to have_no_content("Cosmo")
       expect(page).to have_content("Frank")
