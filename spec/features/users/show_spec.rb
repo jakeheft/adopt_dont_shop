@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit a User's show page
-# Then I see all that User's information
-# Including the User's data
 RSpec.describe "As a visitor" do
   describe "When I visit a User's show page" do
     it "Then I see all of that User's data" do
