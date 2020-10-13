@@ -15,7 +15,6 @@ RSpec.describe "As a visitor" do
         age: "8",
         sex: "Male",
         status: "Adoptable",
-        shelter_name: shelter.name,
         shelter: shelter)
 
         visit "/shelters/#{shelter.id}/pets"
@@ -25,7 +24,7 @@ RSpec.describe "As a visitor" do
         expect(page).to have_content(pet.name)
         expect(page).to have_content(pet.age)
         expect(page).to have_content(pet.sex)
-        expect(page).to have_content(pet.shelter_name)
+        expect(page).to have_content(pet.shelter.name)
     end
   end
 end

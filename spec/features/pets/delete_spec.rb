@@ -17,7 +17,6 @@ RSpec.describe "As a visitor" do
           age: "8",
           sex: "Male",
           status: "Adoptable",
-          shelter_name: shelter.name,
           shelter: shelter)
         pet_2 = Pet.create(
           image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80",
@@ -26,7 +25,6 @@ RSpec.describe "As a visitor" do
           age: "3",
           sex: "Male",
           status: "Adoptable",
-          shelter_name: shelter.name,
           shelter: shelter)
 
         visit "/pets/#{pet_1.id}"
