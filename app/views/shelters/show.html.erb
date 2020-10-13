@@ -14,3 +14,17 @@
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete"/>
 </form>
+
+<h2><%= "#{@shelter.name}'s Reviews" %></h2>
+
+<% @shelter.reviews.each do |review| %>
+  <section>
+    <h4><%= "#{review.title}" %></h4>
+    <p><%= "Reviewed by #{review.user.name}" %>
+    <p><%= "#{review.rating}/5" %>
+    <p><%= "#{review.content}" %><br><br>
+    <% if review.image != nil %>
+      <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+    <% end %>
+  </section>
+<% end %>

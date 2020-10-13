@@ -46,3 +46,52 @@ describe "When I visit a shelter show page I see a link to delete the shelter" d
     expect(page).to have_content("Denver Shelter")
   end
 end
+
+describe "As a visitor," do
+  describe "When I visit a shelter's show page," do
+    it "I see a list of reviews for that shelter containing review components" do
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      review_1 = Review.create!(
+        title: "Good Review",
+        rating: "5",
+        content: "It was good",
+        image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
+        user_id: user.id,
+        shelter_id: shelter_1.id
+      )
+      review_2 = Review.create!(
+        title: "Bad Review",
+        rating: "1",
+        content: "It was bad",
+        user_id: user.id,
+        shelter_id: shelter_1.id
+      )
+
+      visit "/shelters/#{shelter_1.id}"
+
+      expect(page).to have_content("Good Review")
+      expect(page).to have_content("5")
+      expect(page).to have_content("It was good")
+      expect(page).to have_xpath("//img[contains(@src, '#{review_1.image}')]")
+      expect(page).to have_content("Jake")
+      expect(page).to have_content("Bad Review")
+      expect(page).to have_content("1")
+      expect(page).to have_content("It was bad")
+      expect(page).to have_content("Jake")
+
+    end
+  end
+end
