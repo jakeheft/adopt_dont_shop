@@ -12,7 +12,7 @@ RSpec.describe "As a visitor" do
       )
 
       visit "/users/#{user.id}"
-
+      
       expect(page).to have_content("Jake")
       expect(page).to have_content("222 1st St.")
       expect(page).to have_content("Denver")

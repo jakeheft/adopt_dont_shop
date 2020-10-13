@@ -31,9 +31,10 @@ RSpec.describe "As a visitor" do
       fill_in "user_state", with: "CO"
       fill_in "user_zip", with: "80202"
 
-      click_button "Submit"
-
-      expect(current_path).to eq("/users/#{user.id}") #what goes here?
+      click_button "Create User"
+      # save_and_open_page
+      # require "pry"; binding.pry
+      expect(current_path).to eq("/users/#{User.last.id}") #what goes here?
       expect(page).to have_content("Jake")
       expect(page).to have_content("222 1st St.")
       expect(page).to have_content("Denver")
