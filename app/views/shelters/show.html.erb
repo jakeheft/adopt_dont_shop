@@ -17,6 +17,8 @@
 
 <h2><%= "#{@shelter.name}'s Reviews" %></h2>
 
+<%= link_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new" %>
+
 <% @shelter.reviews.each do |review| %>
   <section>
     <h4><%= "#{review.title}" %></h4>
