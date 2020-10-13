@@ -117,11 +117,3 @@ describe "As a visitor," do
     end
   end
 end
-# On this new page, I see a form where I must enter:
-# - title
-# - rating
-# - content
-# - the name of a user that exists in the database
-# I also see a field where I can enter an optional image (web address)
-# When the form is submitted, I should return to that shelter's show page
-# and I can see my new review
