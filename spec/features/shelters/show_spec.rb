@@ -95,3 +95,33 @@ describe "As a visitor," do
     end
   end
 end
+
+describe "As a visitor," do
+  describe "When I visit a shelter's show page" do
+    describe "I see a link to add a new review for this shelter" do
+      it "When I click on this link, I am taken to a new review path" do
+        shelter_1 = Shelter.create(
+          name: "Denver Shelter",
+          address: "123 Main St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80211"
+        )
+
+        visit "/shelters/#{shelter_1.id}"
+
+        click_link('Add Review')
+
+        expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+      end
+    end
+  end
+end
+# On this new page, I see a form where I must enter:
+# - title
+# - rating
+# - content
+# - the name of a user that exists in the database
+# I also see a field where I can enter an optional image (web address)
+# When the form is submitted, I should return to that shelter's show page
+# and I can see my new review
