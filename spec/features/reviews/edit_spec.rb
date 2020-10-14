@@ -30,13 +30,12 @@ describe "As a visitor," do
           visit "/shelters/#{shelter_1.id}"
 
           click_link "Edit Review"
-
           expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/#{review_1.id}/edit")
 
           fill_in "title", with: "So very good"
 
           expect(find_field('Title').value).to eq("So very good")
-          expect(find_field('Rating').value).to eq(5)
+          expect(find_field('Rating').value).to eq("5")
           expect(find_field('Content').value).to eq("It's so good")
 
           click_button "Update Review"
