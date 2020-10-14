@@ -148,7 +148,7 @@ describe "As a visitor," do
 
       click_link "Delete Review"
 
-      expect(current_path).to eq("shelters/#{shelter_1.id}")
+      expect(current_path).to eq("/shelters/#{shelter_1.id}")
 
       expect(page).to have_no_content("So good")
       expect(page).to have_no_content(5)
