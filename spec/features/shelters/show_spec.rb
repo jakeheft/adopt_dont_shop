@@ -118,3 +118,42 @@ describe "As a visitor," do
     end
   end
 end
+
+describe "As a visitor," do
+  describe "When I visit a shelter's show page, I see a link to delete each shelter" do
+    it "When I click this link I am returned to the shelter show page And I don't see that shelter review" do
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      review_1 = Review.create(
+        title: "So good",
+        rating: 5,
+        content: "It's so good",
+        user: user,
+        shelter: shelter_1
+      )
+
+      visit "/shelters/#{shelter_1.id}"
+
+      click_link "Delete Review"
+
+      expect(current_path).to eq("shelters/#{shelter_1.id}")
+
+      expect(page).to have_no_content("So good")
+      expect(page).to have_no_content(5)
+      expect(page).to have_no_content("It's so good")
+      expect(page).to have_no_content("Jake")
+    end
+  end
+end
