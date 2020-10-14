@@ -22,7 +22,7 @@
 <% @shelter.reviews.each do |review| %>
   <section>
     <h4><%= "#{review.title}" %></h4>
-    <p><%= "Reviewed by #{review.user.name}" %>
+    <p><%= "Reviewed by #{review.username}" %>
     <p><%= "#{review.rating}/5" %>
     <p><%= "#{review.content}" %><br><br>
     <% if review.image != nil %>

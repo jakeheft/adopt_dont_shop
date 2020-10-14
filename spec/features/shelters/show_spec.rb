@@ -66,7 +66,7 @@ describe "As a visitor," do
       )
       review_1 = Review.create!(
         title: "Good Review",
-        rating: "5",
+        rating: 5,
         content: "It was good",
         image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
         user_id: user.id,
@@ -74,7 +74,7 @@ describe "As a visitor," do
       )
       review_2 = Review.create!(
         title: "Bad Review",
-        rating: "1",
+        rating: 1,
         content: "It was bad",
         user_id: user.id,
         shelter_id: shelter_1.id
@@ -83,12 +83,12 @@ describe "As a visitor," do
       visit "/shelters/#{shelter_1.id}"
 
       expect(page).to have_content("Good Review")
-      expect(page).to have_content("5")
+      expect(page).to have_content(5)
       expect(page).to have_content("It was good")
       expect(page).to have_xpath("//img[contains(@src, '#{review_1.image}')]")
       expect(page).to have_content("Jake")
       expect(page).to have_content("Bad Review")
-      expect(page).to have_content("1")
+      expect(page).to have_content(1)
       expect(page).to have_content("It was bad")
       expect(page).to have_content("Jake")
 
