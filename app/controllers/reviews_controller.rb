@@ -4,8 +4,6 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    # @shelter = Shelter.find(params[:shelter_id])
-    # binding.pry
     users = User.all
     current_user = users.find do |user|
       user.name == params[:username]
