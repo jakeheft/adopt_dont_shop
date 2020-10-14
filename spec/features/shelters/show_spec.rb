@@ -69,15 +69,16 @@ describe "As a visitor," do
         rating: 5,
         content: "It was good",
         image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
-        user_id: user.id,
-        shelter_id: shelter_1.id
+        user: user,
+        shelter: shelter_1
       )
+
       review_2 = Review.create!(
         title: "Bad Review",
         rating: 1,
         content: "It was bad",
-        user_id: user.id,
-        shelter_id: shelter_1.id
+        user: user,
+        shelter: shelter_1
       )
 
       visit "/shelters/#{shelter_1.id}"
