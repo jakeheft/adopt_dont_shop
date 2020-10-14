@@ -27,6 +27,8 @@ describe "As a visitor" do
 
       click_button "Create Review"
 
+      review_1 = Review.last
+
       expect(current_path).to eq("/shelters/#{shelter_1.id}")
       expect(page).to have_content("Good review")
       expect(page).to have_content("Jake")
