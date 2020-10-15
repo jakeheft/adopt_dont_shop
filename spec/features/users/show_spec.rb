@@ -106,10 +106,18 @@ describe "As a visitor" do
         user: user,
         shelter: shelter_1
       )
+      review_3 = Review.create(
+        title: "So bad",
+        rating: 1,
+        content: "It's so bad",
+        image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
+        user: user,
+        shelter: shelter_1
+      )
 
       visit "/users/#{user.id}"
-
-      expect(page).to have_content("Average review rating: 3")
+      save_and_open_page
+      expect(page).to have_content("Average review rating: 2.33")
     end
   end
 end
