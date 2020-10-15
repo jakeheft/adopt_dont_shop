@@ -8,6 +8,10 @@
 <p>State: <%= "#{@user.state}" %></p>
 <p>Zipcode: <%= "#{@user.zip}" %></p>
 
+<% total = @user.reviews.sum { |review| review.rating } %>
+<p>Average review rating: <%= (total.to_f / @user.reviews.count).round(2) %></p>
+
+
 <% @user.reviews.each do |review| %>
 <section>
   <h4><%= "#{review.title}" %></h4>
