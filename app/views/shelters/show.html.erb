@@ -14,3 +14,23 @@
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete"/>
 </form>
+
+<h2><%= "#{@shelter.name}'s Reviews" %></h2>
+
+<%= link_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new" %>
+
+<% @shelter.reviews.each do |review| %>
+  <section>
+    <section class="row-fluid" style="display:inline-block;">
+      <h4><%= "#{review.title}" %></h4>
+      <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit" %></p>
+      <p><%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete %></p>
+    </section>
+    <p><%= "Reviewed by #{review.user.name}" %>
+    <p><%= "#{review.rating}/5" %>
+    <p><%= "#{review.content}" %><br><br>
+    <% if review.image != nil %>
+      <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+    <% end %>
+  </section>
+<% end %>

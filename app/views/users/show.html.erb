@@ -7,3 +7,15 @@
 <p>City: <%= "#{@user.city}" %></p>
 <p>State: <%= "#{@user.state}" %></p>
 <p>Zipcode: <%= "#{@user.zip}" %></p>
+
+<% @user.reviews.each do |review| %>
+<section>
+  <h4><%= "#{review.title}" %></h4>
+  <p><%= "Review for #{review.shelter.name}" %>
+  <p><%= "#{review.rating}/5" %>
+  <p><%= "#{review.content}" %><br><br>
+  <% if review.image != nil %>
+  <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+  <% end %>
+</section>
+<% end %>
