@@ -35,7 +35,12 @@ class ReviewsController < ApplicationController
       shelter_id: params[:shelter_id],
       user: User.where(name: params[:username])[0]
     })
-    redirect_to "/shelters/#{review.shelter_id}"
+    # binding.pry
+    if review.title == "" || review.rating == "" || review.content == "" || review.user == ""
+      redirect_to "/shelters/#{review.shelter_id}/reviews/#{review.id}/edit", notice: "All fields except for image must be filled out."
+    else
+      redirect_to "/shelters/#{review.shelter_id}"
+    end
   end
 
   def destroy
