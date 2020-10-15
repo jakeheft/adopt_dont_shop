@@ -116,8 +116,27 @@ describe "As a visitor" do
       )
 
       visit "/users/#{user.id}"
-      save_and_open_page
+      
       expect(page).to have_content("Average review rating: 2.33")
+    end
+    it "if the user doesn't have reviews, we will be informed that is the case" do
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+
+      visit "/users/#{user.id}"
+
+      expect(page).to have_content("This user doesn't have any reviews")
     end
   end
 end
+
+# describe "As a visitor" do
+#   describe "When I visit a User's show page" do
+# Then I see a section for "Highlighted Reviews"
+# And I see the review with the best rating that this user has written
+# And I see the review with the worst rating that this user has written
