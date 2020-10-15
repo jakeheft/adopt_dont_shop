@@ -73,3 +73,43 @@ describe "As a visitor" do
     end
   end
 end
+
+describe "As a visitor" do
+  describe "When I visit a User's show page" do
+    it "Then I see the average rating of all of their reviews" do
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      review_1 = Review.create(
+        title: "So good",
+        rating: 5,
+        content: "It's so good",
+        user: user,
+        shelter: shelter_1
+      )
+      review_2 = Review.create(
+        title: "So bad",
+        rating: 1,
+        content: "It's so bad",
+        image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
+        user: user,
+        shelter: shelter_1
+      )
+
+      visit "/users/#{user.id}"
+
+      expect(page).to have_content("Average review rating: 3")
+    end
+  end
+end
