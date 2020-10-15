@@ -8,14 +8,41 @@
 <p>State: <%= "#{@user.state}" %></p>
 <p>Zipcode: <%= "#{@user.zip}" %></p>
 
-<% @user.reviews.each do |review| %>
-<section>
-  <h4><%= "#{review.title}" %></h4>
-  <p><%= "Review for #{review.shelter.name}" %>
-  <p><%= "#{review.rating}/5" %>
-  <p><%= "#{review.content}" %><br><br>
-  <% if review.image != nil %>
-  <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+<% total = @user.reviews.sum { |review| review.rating } %>
+<% if total == 0 %>
+  <p><%= "This user doesn't have any reviews" %></p>
+<% else %>
+  <p>Average review rating: <%= (total.to_f / @user.reviews.count).round(2) %></p>
+<% end %>
+
+<section id='highlights'>
+  <% if @user.reviews.length >= 3 %>
+    <h3> Highlighted Reviews </h3>
+    <% highlighted_reviews = [@user.reviews.max_by { |review| review.rating }] %>
+    <% highlighted_reviews << @user.reviews.min_by { |review| review.rating } %>
+    <% highlighted_reviews.each do |review| %>
+      <section>
+        <h4><%= "#{review.title}" %></h4>
+        <p><%= "Review for #{review.shelter.name}" %>
+        <p><%= "#{review.rating}/5" %>
+        <p><%= "#{review.content}" %><br><br>
+        <% if review.image != nil %>
+          <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+        <% end %>
+      </section>
+    <% end %>
   <% end %>
 </section>
+
+<h2><%= "All Reviews" if @user.reviews != [] %></h2>
+<% @user.reviews.each do |review| %>
+  <section>
+    <h4><%= "#{review.title}" %></h4>
+    <p><%= "Review for #{review.shelter.name}" %>
+    <p><%= "#{review.rating}/5" %>
+    <p><%= "#{review.content}" %><br><br>
+    <% if review.image != nil %>
+      <a href="/pets/<%= "#{review.id}" %>"><img src="<%= review.image %>" style="height:150px;"></a>
+    <% end %>
+  </section>
 <% end %>
