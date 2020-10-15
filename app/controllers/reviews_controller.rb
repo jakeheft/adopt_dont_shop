@@ -12,7 +12,9 @@ class ReviewsController < ApplicationController
       shelter_id: params[:shelter_id],
       user: User.where(name: params[:username])[0]
       })
-    if @review.id == nil
+    if @review.user == nil
+      redirect_to "/shelters/#{@review.shelter_id}/reviews/new", notice: "Please enter the name of a valid user"
+    elsif @review.id == nil
       redirect_to "/shelters/#{@review.shelter_id}/reviews/new", notice: "All fields except for image must be filled out."
     else
       redirect_to "/shelters/#{@review.shelter_id}"
