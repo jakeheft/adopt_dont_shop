@@ -9,8 +9,11 @@
 <p>Zipcode: <%= "#{@user.zip}" %></p>
 
 <% total = @user.reviews.sum { |review| review.rating } %>
-<p>Average review rating: <%= (total.to_f / @user.reviews.count).round(2) %></p>
-
+<% if total == 0 %>
+  <p><%= "This user doesn't have any reviews" %></p>
+<% else %>
+  <p>Average review rating: <%= (total.to_f / @user.reviews.count).round(2) %></p>
+<% end %>
 
 <% @user.reviews.each do |review| %>
 <section>
