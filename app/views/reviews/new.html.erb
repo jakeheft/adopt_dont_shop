@@ -1,3 +1,5 @@
+<h1> Write Your Review </h1>
+
 <%= form_tag "/shelters/#{@shelter.id}" do %>
   <p><%= label_tag :title %></p>
   <%= text_field_tag :title %>
@@ -11,4 +13,10 @@
   <%= text_field_tag :username %>
 
   <%= submit_tag "Create Review" %>
+<% end %><br>
+
+<% flash.each do |type, msg| %>
+<div>
+  <%= msg %>
+</div>
 <% end %>
