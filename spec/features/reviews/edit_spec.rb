@@ -85,3 +85,40 @@ describe "As a visitor," do
     end
   end
 end
+
+describe "As a visitor," do
+  describe "When I visit the page to edit a review and I enter the name of a User that doesn't exist in the database and submit" do
+    it "I see a flash message indicating that the User couldn't be found and I'm returned to the new form to create a new review" do
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      review_1 = Review.create(
+        title: "So good",
+        rating: 5,
+        content: "It's so good",
+        user: user,
+        shelter: shelter_1
+      )
+
+      visit "/shelters/#{shelter_1.id}/reviews/#{review_1.id}/edit"
+
+      fill_in "Username", with: "Joke"
+
+      click_button "Update Review"
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/#{review_1.id}/edit")
+      expect(page).to have_content("Please enter the name of a valid user")
+    end
+  end
+end
