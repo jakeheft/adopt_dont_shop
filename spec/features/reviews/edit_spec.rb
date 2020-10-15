@@ -48,3 +48,40 @@ describe "As a visitor," do
     end
   end
 end
+
+describe "As a visitor," do
+  describe "When I visit the page to edit a review and I fail to enter a field and submit" do
+    it "I see a flash message indicating that I need to fill in info in order to submit review And I'm returned to the edit form to edit that review" do
+      user = User.create(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      review_1 = Review.create(
+        title: "So good",
+        rating: 5,
+        content: "It's so good",
+        user: user,
+        shelter: shelter_1
+      )
+
+      visit "/shelters/#{shelter_1.id}/reviews/#{review_1.id}/edit"
+
+      fill_in "Title", with: ""
+
+      click_button "Update Review"
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/#{review_1.id}/edit")
+      expect(page).to have_content("All fields except for image must be filled out.")
+    end
+  end
+end
