@@ -9,5 +9,7 @@ RSpec.describe Pet, type: :model do
   end
   describe "relationships" do
     it { should belong_to :shelter }
+    it { should have_many :applications }
+    it { should have_many(:users).through(:applications) }
   end
 end
