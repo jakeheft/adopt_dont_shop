@@ -110,7 +110,10 @@ describe "As a visitor" do
           click_button "Find Pets"
 
           expect(current_path).to eq("/applications/#{application.id}")
-          expect(page).to have_content(pet_2.name)
+
+          within '#add-pets' do
+            expect(page).to have_content(pet_2.name)
+          end
         end
       end
     end
