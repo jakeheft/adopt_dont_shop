@@ -331,3 +331,55 @@ describe "As a visitor" do
     end
   end
 end
+
+describe "As a visitor" do
+  describe "When visit an application show page" do
+    describe "And I search for Pets by name" do
+      it "Then I see any pet whose name PARTIALLY matches my search" do
+        user = User.create!(
+          name: "Jake",
+          address: "222 1st St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80202"
+        )
+        shelter = Shelter.create(
+          name: "Denver Shelter",
+          address: "123 Main St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80211"
+        )
+        pet_1 = Pet.create(
+          image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+          name: "Cosmo",
+          age: "8",
+          sex: "Male",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        pet_2 = Pet.create(
+          image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+          name: "Cosmopolis",
+          age: "9",
+          sex: "Female",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        application = Application.create(
+          user: user,
+          status: "In Progress"
+        )
+
+        visit "/applications/#{application.id}"
+
+        fill_in "pet_name", with: "cosmo"
+
+        click_button "Find Pets"
+
+        expect(page).to have_content("Cosmo")
+        expect(page).to have_content("Cosmopolis")
+      end
+    end
+  end
+end
