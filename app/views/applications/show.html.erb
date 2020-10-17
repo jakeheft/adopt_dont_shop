@@ -1,0 +1,13 @@
+<h1><%= @application.user.name %>'s Application</h1>
+
+<p>Address: <%= @application.user.address %></p>
+<p>Description: <%= @application.description %></p>
+
+<p>Pets:</p>
+<ul>
+    <% @application.pets.each do |pet| %>
+      <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
+    <% end %>
+</ul>
+
+<p>Application status: <%= @application.status %></p>
