@@ -48,13 +48,17 @@ describe "As a visitor" do
       )
 
       visit "/applications/#{application.id}"
-
+      
       expect(page).to have_content(user.name)
       expect(page).to have_content(user.address)
       expect(page).to have_content(application.description)
       expect(page).to have_content(application.status)
       expect(page).to have_link("Cosmo")
       expect(page).to have_link("Zoey")
+
+      click_link "Zoey"
+
+      expect(current_path).to eq("/pets/#{pet_2.id}")
     end
   end
 end
