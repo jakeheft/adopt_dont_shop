@@ -248,3 +248,27 @@ describe "As a visitor" do
     end
   end
 end
+
+describe "As a visitor" do
+  describe "When I visit an application's show page" do
+    describe "And I have not added any pets to the application" do
+      it "Then I do not see a section to submit my application" do
+        user = User.create!(
+          name: "Jake",
+          address: "222 1st St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80202"
+        )
+        application = Application.create(
+          user: user,
+          status: "In Progress"
+        )
+
+        visit "/applications/#{application.id}"
+        
+        expect(page).to have_no_content("Submit Application")
+      end
+    end
+  end
+end
