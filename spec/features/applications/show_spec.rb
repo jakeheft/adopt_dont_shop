@@ -119,3 +119,65 @@ describe "As a visitor" do
     end
   end
 end
+
+describe "As a visitor" do
+  describe "When I visit an application's show page and I search for a Pet by name" do
+    describe "And I click on an 'Adopt this Pet' button next to a pet's name" do
+      it "Then I am taken back to the application show page and I see the Pet I want to adopt listed on this application" do
+        user = User.create!(
+          name: "Jake",
+          address: "222 1st St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80202"
+        )
+        shelter = Shelter.create(
+          name: "Denver Shelter",
+          address: "123 Main St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80211"
+        )
+        pet_1 = Pet.create(
+          image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+          name: "Cosmo",
+          age: "8",
+          sex: "Male",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        pet_2 = Pet.create(
+          image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+          name: "Zoey",
+          age: "9",
+          sex: "Female",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        application = Application.create(
+          user: user,
+          description: "I am awesome",
+          status: "In Progress"
+        )
+
+        visit "/applications/#{application.id}"
+
+        click_button "Adopt this Pet"
+
+        expect(current_path).to eq("/applications/#{application.id}")
+
+        within '#added-pets' do
+          expect(page).to have_content("Cosmo")
+          expect(page).to have_content(8)
+          expect(page).to have_content("Male")
+          expect(page).to have_content("Adoptable")
+        end
+      end
+    end
+  end
+end
+# And I see the names Pets that matches my search
+# Then next to each Pet's name I see a button to "Adopt this Pet"
+# When I click one of these buttons
+# Then I am taken back to the application show page
+# And I see the Pet I want to adopt listed on this application
