@@ -5,6 +5,6 @@ class User < ApplicationRecord
   # has_many :pets, through: :applications
 
   def full_address
-    "#{self.address}, #{self.city}, #{self.state}, #{self.zip}"
+    "#{address}, #{city}, #{state}, #{zip}"
   end
 end
