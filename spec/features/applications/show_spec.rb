@@ -266,8 +266,67 @@ describe "As a visitor" do
         )
 
         visit "/applications/#{application.id}"
-        
+
         expect(page).to have_no_content("Submit Application")
+      end
+    end
+  end
+end
+
+describe "As a visitor" do
+  describe "When I visit an application's show page" do
+    describe "And I have added one or more pets to the application, but fail to enter description" do
+      it "Then I am taken back to the application's show page and I see a flash message to fill out that field before I can submit the application and I see my application is still 'In Progress'" do
+        user = User.create!(
+          name: "Jake",
+          address: "222 1st St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80202"
+        )
+        shelter = Shelter.create(
+          name: "Denver Shelter",
+          address: "123 Main St.",
+          city: "Denver",
+          state: "CO",
+          zip: "80211"
+        )
+        pet_1 = Pet.create(
+          image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+          name: "Cosmo",
+          age: "8",
+          sex: "Male",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        pet_2 = Pet.create(
+          image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+          name: "Zoey",
+          age: "9",
+          sex: "Female",
+          status: "Adoptable",
+          shelter: shelter
+        )
+        application = Application.create(
+          user: user,
+          status: "In Progress"
+        )
+        PetApplication.create(
+          pet: pet_1,
+          application: application
+        )
+        PetApplication.create(
+          pet: pet_2,
+          application: application
+        )
+
+        visit "/applications/#{application.id}"
+
+        click_button "Submit Application"
+
+        expect(current_path).to eq("/applications/#{application.id}")
+        expect(page).to have_content("You must fill out a description to complete a submission.")
+        expect(page).to have_content("In Progress")
       end
     end
   end
