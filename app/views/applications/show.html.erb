@@ -1,7 +1,9 @@
 <h1><%= @application.user.name %>'s Application</h1>
 
 <p>Address: <%= @application.user.full_address %></p>
-<p>Description: <%= @application.description %></p>
+<% if @application.description %>
+  <p>Description: <%= @application.description %></p>
+<% end %>
 
 <section id="added-pets">
   <h3>Pet(s) I want to adopt:</h3>
@@ -14,22 +16,35 @@
   </ul>
 </section>
 
-<section id='add-pets'>
-  <h3>Add a Pet to this Application</h3>
-  <%= form_tag "/applications/#{@application.id}", method: :get do %>
-    <%= label_tag "Search for Pets:" %>
-    <%= text_field_tag :pet_name, params[:pet_name] %>
-    <%= submit_tag "Find Pets" %>
+<section id="apply">
+  <% if @application.pets.length > 0 && @application.status == "In Progress" %>
+    <h3>Submit Application</h3>
+    <%= form_tag "/applications/#{@application.id}", method: :patch do %>
+      <%= label_tag :description %>
+      <%= text_area_tag :description %>
+      <%= submit_tag "Submit Application" %>
+    <% end %>
   <% end %>
+</section>
 
-  <% if params[:pet_name] %>
-    <% Pet.find_pets(params[:pet_name]).each do |pet| %>
-      <img src="<%= pet.image %>" style="height:250px; width:300px;">
-      <p><%= "Name: #{pet.name}" %> <%= button_to "Adopt this Pet", "/pet_applications/#{pet.id}/#{@application.id}", method: :post %></p>
-      <p><%= "Description: #{pet.description}" %></p>
-      <p><%= "Age: #{pet.age}" %></p>
-      <p><%= "Sex: #{pet.sex}" %></p>
-      <p><%= "Adoption Status: #{pet.status}" %></p>
+<section id='add-pets'>
+  <% if @application.status == "In Progress" %>
+    <h3>Add a Pet to this Application</h3>
+    <%= form_tag "/applications/#{@application.id}", method: :get do %>
+      <%= label_tag "Search for Pets:" %>
+      <%= text_field_tag :pet_name, params[:pet_name] %>
+      <%= submit_tag "Find Pets" %>
+    <% end %>
+
+    <% if params[:pet_name] %>
+      <% Pet.find_pets(params[:pet_name]).each do |pet| %>
+        <img src="<%= pet.image %>" style="height:250px; width:300px;">
+        <p><%= "Name: #{pet.name}" %> <%= button_to "Adopt this Pet", "/pet_applications/#{pet.id}/#{@application.id}", method: :post %></p>
+        <p><%= "Description: #{pet.description}" %></p>
+        <p><%= "Age: #{pet.age}" %></p>
+        <p><%= "Sex: #{pet.sex}" %></p>
+        <p><%= "Adoption Status: #{pet.status}" %></p>
+      <% end %>
     <% end %>
   <% end %>
 </section>

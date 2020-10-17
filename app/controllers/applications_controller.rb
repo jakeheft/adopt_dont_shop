@@ -17,4 +17,22 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     end
   end
+
+  def update
+    application = Application.find(params[:app_id])
+    application.update(
+      description: params[:description],
+      status: "Pending"
+    )
+    if application.description == nil
+      redirect_to "/applications/#{application.id}", notice: "You must fill out a description to complete a submission."
+    else
+      redirect_to "/applications/#{application.id}"
+    end
+  end
+
+  # private
+  # def application_params
+  #   params.permit(:description, :app_id)
+  # end
 end
