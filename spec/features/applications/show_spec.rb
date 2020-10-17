@@ -103,17 +103,8 @@ describe "As a visitor" do
             description: "I am awesome",
             status: "In Progress"
           )
-          PetApplication.create(
-            pet: pet_1,
-            application: application
-          )
-          PetApplication.create(
-            pet: pet_2,
-            application: application
-          )
 
           visit "/applications/#{application.id}"
-
           fill_in "pet_name", with: "zoey"
 
           click_button "Find Pets"
