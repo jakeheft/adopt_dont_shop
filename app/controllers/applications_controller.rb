@@ -11,6 +11,10 @@ class ApplicationsController < ApplicationController
       user: User.where(name: params[:user_name])[0],
       status: "In Progress"
     )
-    redirect_to "/applications/#{application.id}"
+    if application.id == nil
+      redirect_to "/applications/new", notice: "Please enter a user name that matches an existing user"
+    else
+      redirect_to "/applications/#{application.id}"
+    end
   end
 end
