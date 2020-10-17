@@ -12,7 +12,7 @@ class ShelterPetsController < ApplicationController
     shelter = Shelter.find(params[:shelter_id])
     shelter.pets.create({
       image: params[:pet_image],
-      name: params[:pet_name].capitalize,
+      name: params[:pet_name].downcase,
       description: params[:pet_description],
       age: params[:pet_age],
       sex: params[:pet_sex],
