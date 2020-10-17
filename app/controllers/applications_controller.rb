@@ -20,13 +20,13 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:app_id])
-    application.update(
-      description: params[:description],
-      status: "Pending"
-    )
-    if application.description == nil
+    if params[:description] == "" || params[:description] == nil
       redirect_to "/applications/#{application.id}", notice: "You must fill out a description to complete a submission."
     else
+      application.update(
+        description: params[:description],
+        status: "Pending"
+      )
       redirect_to "/applications/#{application.id}"
     end
   end
