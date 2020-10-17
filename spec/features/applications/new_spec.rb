@@ -39,7 +39,7 @@ describe "As a visitor" do
 
         click_button "Create Application"
 
-        expect(current_path).to eq("/applicaitons/new")
+        expect(current_path).to eq("/applications/new")
         expect(page).to have_content("Please enter a user name that matches an existing user")
       end
     end
