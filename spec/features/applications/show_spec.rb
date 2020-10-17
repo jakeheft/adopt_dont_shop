@@ -48,9 +48,9 @@ describe "As a visitor" do
       )
 
       visit "/applications/#{application.id}"
-      
+
       expect(page).to have_content(user.name)
-      expect(page).to have_content(user.address)
+      expect(page).to have_content(user.full_address)
       expect(page).to have_content(application.description)
       expect(page).to have_content(application.status)
       expect(page).to have_link("Cosmo")
