@@ -5,4 +5,8 @@ class Pet < ApplicationRecord
   # has_many :users, through: :applications
 
   validates_presence_of :image, :name, :age, :sex
+
+  def self.find_pets(pet_name)
+    pet = Pet.where(name: pet_name.capitalize)
+  end
 end
