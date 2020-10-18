@@ -9,3 +9,8 @@
 <p><%= "Adoption Status: #{@pet.status}" %></p>
 <%= link_to "Update Pet", "/pets/#{@pet.id}/edit" %>
 <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>
+
+<h3>Open Applications for <%= @pet.name %> </h3>
+<% @pet.applications.each do |app| %>
+  <%= link_to "#{app.user.name}", "/applications/#{app.id}" %><br>
+<% end %>
