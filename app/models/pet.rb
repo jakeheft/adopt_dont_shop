@@ -7,10 +7,8 @@ class Pet < ApplicationRecord
   validates_presence_of :image, :name, :age, :sex
 
   def self.find_pets(pet_name)
-    # pet = Pet.where(name: LIKE "%#{pet_name.downcase}%")
-    pets = Pet.all
-    pets.find_all do |pet|
-      name.include?(pet_name)
+    Pet.all.find_all do |pet|
+      pet.name.downcase.include?(pet_name.downcase)
     end
   end
 end
