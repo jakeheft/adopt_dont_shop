@@ -373,12 +373,33 @@ describe "As a visitor" do
 
         visit "/applications/#{application.id}"
 
-        fill_in "pet_name", with: "cosmo"
+        fill_in "pet_name", with: "osmo"
 
         click_button "Find Pets"
 
         expect(page).to have_content("Cosmo")
         expect(page).to have_content("Cosmopolis")
+
+        fill_in "pet_name", with: "C"
+
+        click_button "Find Pets"
+
+        expect(page).to have_content("Cosmo")
+        expect(page).to have_content("Cosmopolis")
+
+        fill_in "pet_name", with: "mop"
+
+        click_button "Find Pets"
+
+        expect(page).to have_content("Cosmopolis")
+
+        fill_in "pet_name", with: "zoey"
+
+        click_button "Find Pets"
+
+        expect(page).to have_no_content("Zoey")
+        expect(page).to have_no_content("Cosmo")
+
       end
     end
   end
