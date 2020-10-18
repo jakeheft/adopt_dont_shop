@@ -9,9 +9,12 @@ class PetApplicationsController < ApplicationController
   end
 
   def update
-    pet_app = PetApplication.where(application_id: params[:application_id]).where(pet_id: params[:pet_id])
-
-    pet_app.update(pet_application_status: "Approved")
+    pet_app = PetApplication.retrieve(params[:pet_id], params[:application_id])
+    if params[:response] == "reject"
+      pet_app.update(pet_application_status: "Rejected")
+    else
+      pet_app.update(pet_application_status: "Approved")
+    end
 
     redirect_to "/admin/applications/#{params[:application_id]}"
   end

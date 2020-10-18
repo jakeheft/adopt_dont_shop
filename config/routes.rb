@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   patch '/applications/:app_id', to: 'applications#update'
 
   post '/pet_applications/:pet_id/:application_id', to: 'pet_applications#create'
-  patch '/pet_applications/:pet_id/:application_id', to: 'pet_applications#update'
+  patch '/pet_applications/:pet_id/:application_id/:response', to: 'pet_applications#update'
 
   get '/admin/applications/:application_id', to: 'admin_applications#show'
 

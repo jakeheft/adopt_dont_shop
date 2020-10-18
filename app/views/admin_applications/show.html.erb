@@ -15,10 +15,13 @@
       <% @application.pets.each do |pet| %>
         <section id="pet-<%= pet.id %>">
           <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
-          <% if PetApplication.retrieve(pet.id, @application.id).pet_application_status != "Pending" %>
+          <% if PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Approved" %>
             <p>Approved</p>
+          <% elsif PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Rejected" %>
+            <p>Rejected</p>
           <% else %>
-            <%= button_to "Approve Pet", "/pet_applications/#{pet.id}/#{@application.id}", method: :patch %>
+            <%= button_to "Approve Pet", "/pet_applications/#{pet.id}/#{@application.id}/approve", method: :patch %>
+            <%= button_to "Reject Pet", "/pet_applications/#{pet.id}/#{@application.id}/reject", method: :patch %>
           <% end %>
         </section>
       <% end %>
