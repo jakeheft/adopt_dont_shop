@@ -64,3 +64,29 @@ describe "As a visitor" do
     end
   end
 end
+
+describe "As a visitor" do
+  describe "When I visit a pet applications index page for a pet that has no applications on them" do
+    it "I see a message saying that there are no applications for this pet yet" do
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      pet = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "Cosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter
+      )
+
+      visit "/pets/#{pet.id}/applications"
+
+      expect(page).to have_content("There are no applications for this pet as of now")
+    end
+  end
+end
