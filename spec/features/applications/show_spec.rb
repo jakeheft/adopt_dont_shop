@@ -40,11 +40,13 @@ describe "As a visitor" do
       )
       PetApplication.create(
         pet: pet_1,
-        application: application
+        application: application,
+        pet_application_status: "Pending"
       )
       PetApplication.create(
         pet: pet_2,
-        application: application
+        application: application,
+        pet_application_status: "Pending"
       )
 
       visit "/applications/#{application.id}"
@@ -222,11 +224,13 @@ describe "As a visitor" do
           )
           PetApplication.create(
             pet: pet_1,
-            application: application
+            application: application,
+            pet_application_status: "Pending"
           )
           PetApplication.create(
             pet: pet_2,
-            application: application
+            application: application,
+            pet_application_status: "Pending"
           )
 
           visit "/applications/#{application.id}"
@@ -313,11 +317,13 @@ describe "As a visitor" do
         )
         PetApplication.create(
           pet: pet_1,
-          application: application
+          application: application,
+          pet_application_status: "Pending"
         )
         PetApplication.create(
           pet: pet_2,
-          application: application
+          application: application,
+          pet_application_status: "Pending"
         )
 
         visit "/applications/#{application.id}"
