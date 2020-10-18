@@ -1,4 +1,9 @@
 <h1>Open Applications for <%= @pet.name %> </h1>
-<% @pet.applications.each do |app| %>
-  <%= link_to "#{app.user.name}", "/applications/#{app.id}" %><br>
+
+<% if @pet.applications == [] %>
+  <p>There are no applications for this pet as of now</p>
+<% else %>
+  <% @pet.applications.each do |app| %>
+    <%= link_to "#{app.user.name}", "/applications/#{app.id}" %><br>
+  <% end %>
 <% end %>
