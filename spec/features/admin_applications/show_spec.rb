@@ -1,4 +1,4 @@
-rails 'rails_helper'
+require 'rails_helper'
 
 describe "As a visitor" do
   describe "When I visit an admin application show page" do
@@ -41,30 +41,31 @@ describe "As a visitor" do
         )
         PetApplication.create(
           pet: pet_1,
-          application: application
+          application: application,
+          pet_application_status: "Pending"
         )
         PetApplication.create(
           pet: pet_2,
-          application: application
+          application: application,
+          pet_application_status: "Pending"
         )
 
         visit "/admin/applications/#{application.id}"
-
         within "#pet-#{pet_1.id}" do
-          click_button("Approve Application")
+          click_button("Approve Pet")
 
           expect(current_path).to eq("/admin/applications/#{application.id}")
 
-          expect(page).to have_no_button("Approve Application")
+          expect(page).to have_no_button("Approve Pet")
           expect(page).to have_content("Approved")
         end
 
         within "#pet-#{pet_2.id}" do
-          click_button("Approve Application")
+          click_button("Approve Pet")
 
           expect(current_path).to eq("/admin/applications/#{application.id}")
 
-          expect(page).to have_no_button("Approve Application")
+          expect(page).to have_no_button("Approve Pet")
           expect(page).to have_content("Approved")
         end
       end
