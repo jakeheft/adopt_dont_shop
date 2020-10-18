@@ -70,22 +70,22 @@ describe "As a visitor" do
         city: "Denver",
         state: "CO",
         zip: "80211")
-        pet_1 = Pet.create(
-          image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-          name: "Cosmo",
-          description: "Cute, cuddly, awesome",
-          age: "8",
-          sex: "Male",
-          status: "Adoptable",
-          shelter: shelter)
-        pet_2 = Pet.create(
-          image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80",
-          name: "Frank",
-          description: "Mean",
-          age: "3",
-          sex: "Male",
-          status: "Adoptable",
-          shelter: shelter)
+      pet_1 = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "Cosmo",
+        description: "Cute, cuddly, awesome",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter)
+      pet_2 = Pet.create(
+        image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80",
+        name: "Frank",
+        description: "Mean",
+        age: "3",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter)
 
       visit "pets/"
 
@@ -94,6 +94,20 @@ describe "As a visitor" do
       expect(current_path).to eq ("/pets")
       expect(page).to have_no_content("Cosmo")
       expect(page).to have_content("Frank")
+    end
+  end
+end
+
+describe "As a visitor" do
+  describe "When I visit the pet index page" do
+    describe "And I click the link to 'Start an Application'" do
+      it "Then I am taken to the new application page where I see a form" do
+        visit '/pets'
+
+        click_link('Start an Application')
+
+        expect(current_path).to eq('/applications/new')
+      end
     end
   end
 end

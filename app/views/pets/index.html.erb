@@ -2,6 +2,10 @@
 
 <h1>Pets</h1>
 
+<%= link_to 'Start an Application', '/applications/new' %>
+
+<h3><%= "There are no available pets" if @pets == [] %></h3>
+
 <% @pets.each do |pet| %>
   <a href="/pets/<%= "#{pet.id}" %>"><img src="<%= pet.image %>" style="height:250px; width:300px;"></a>
   <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
