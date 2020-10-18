@@ -10,11 +10,15 @@ class Application < ApplicationRecord
       pet_app.pet_application_status
     end
     if statuses.include?("Rejected")
-      self.status = "Rejected"
+      self.update(status: "Rejected")
+      self.status
     elsif statuses.include?("Pending")
-      self.status = "Pending"
+      self.update(status: "Pending")
+      self.status
     else
-      self.status = "Approved"
+      self.update(status: "Approved")
+      self.status
+      # redirect_to "admin/applications/#{self.id}"
     end
   end
 end
