@@ -11,4 +11,10 @@ class Pet < ApplicationRecord
       pet.name.downcase.include?(pet_name.downcase)
     end
   end
+
+  def approved_anywhere?
+    applications.any? do |application|
+      application.status == "Approved"
+    end
+  end
 end

@@ -1,0 +1,33 @@
+<header><%= link_to 'Go to Shelters', '/shelters' %> <%= link_to 'Go to Pets', '/pets' %></header>
+
+<h1><%= @application.user.name %>'s Application</h1>
+
+<p>Address: <%= @application.user.full_address %></p>
+<% if @application.description %>
+  <p>Description: <%= @application.description %></p>
+<% end %>
+
+<section id="added-pets">
+  <h3>Pet(s) Applied For:</h3>
+  <p><%= "#{@application.user.name} has not applied for any pets" if @application.pets == [] %></p>
+
+  <ul>
+      <% @application.pets.each do |pet| %>
+        <section id="pet-<%= pet.id %>">
+          <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
+          <% if PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Approved" %>
+            <p>Approved</p>
+          <% elsif PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Rejected" %>
+            <p>Rejected</p>
+          <% elsif pet.approved_anywhere? %>
+            <p>Already approved in another application</p>
+          <% else %>
+            <%= button_to "Approve Pet", "/pet_applications/#{pet.id}/#{@application.id}/approve", method: :patch %>
+            <%= button_to "Reject Pet", "/pet_applications/#{pet.id}/#{@application.id}/reject", method: :patch %>
+          <% end %>
+        </section>
+      <% end %>
+  </ul>
+</section>
+
+<p>Application status: <%= @application.status_check %></p>
