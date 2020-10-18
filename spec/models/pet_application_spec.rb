@@ -93,12 +93,12 @@ RSpec.describe PetApplication, type: :model do
         pet_application_status: "Pending"
       )
 
-      expect(PetApplication.retrieve_id(pet_1.id, application_1.id)).to eq (pet_app_4.id)
-      expect(PetApplication.retrieve_id(pet_1.id, application_2.id)).to eq (pet_app_1.id)
-      expect(PetApplication.retrieve_id(pet_2.id, application_1.id)).to eq (pet_app_5.id)
-      expect(PetApplication.retrieve_id(pet_2.id, application_2.id)).to eq (pet_app_2.id)
-      expect(PetApplication.retrieve_id(pet_3.id, application_1.id)).to eq (pet_app_6.id)
-      expect(PetApplication.retrieve_id(pet_3.id, application_2.id)).to eq (pet_app_3.id)
+      expect(PetApplication.retrieve(pet_1.id, application_1.id)).to eq (pet_app_4)
+      expect(PetApplication.retrieve(pet_1.id, application_2.id)).to eq (pet_app_1)
+      expect(PetApplication.retrieve(pet_2.id, application_1.id)).to eq (pet_app_5)
+      expect(PetApplication.retrieve(pet_2.id, application_2.id)).to eq (pet_app_2)
+      expect(PetApplication.retrieve(pet_3.id, application_1.id)).to eq (pet_app_6)
+      expect(PetApplication.retrieve(pet_3.id, application_2.id)).to eq (pet_app_3)
     end
   end
 end
