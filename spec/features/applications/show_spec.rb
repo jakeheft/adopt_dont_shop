@@ -335,7 +335,7 @@ end
 describe "As a visitor" do
   describe "When visit an application show page" do
     describe "And I search for Pets by name" do
-      it "Then I see any pet whose name PARTIALLY matches my search" do
+      it "Then I see any pet whose name PARTIALLY matches my search and casing doesn't matter" do
         user = User.create!(
           name: "Jake",
           address: "222 1st St.",
@@ -380,7 +380,7 @@ describe "As a visitor" do
         expect(page).to have_content("Cosmo")
         expect(page).to have_content("Cosmopolis")
 
-        fill_in "pet_name", with: "C"
+        fill_in "pet_name", with: "cOS"
 
         click_button "Find Pets"
 
