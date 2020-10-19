@@ -248,8 +248,8 @@ describe "When I visit a shelter's show page" do
 
     visit "/shelters/#{shelter.id}"
 
-    expect(page).to have_content("Number of Pets at #{shelter.name}: #{shelter.total_pets}")
-    expect(page).to have_content("Average Review Rating at #{shelter.name}: #{shelter.average_reviews}")
-    expect(page).to have_content("Number of Applications on File at #{shelter.name}: #{shelter.total_applications}")
+    expect(page).to have_content("We have #{shelter.total_pets} right now!")
+    expect(page).to have_content("Average Review Rating: 4.67")
+    expect(page).to have_content("#{shelter.total_applications} Applications Currently on File")
   end
 end
