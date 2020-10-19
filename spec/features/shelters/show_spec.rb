@@ -157,3 +157,99 @@ describe "As a visitor," do
     end
   end
 end
+
+describe "When I visit a shelter's show page" do
+  it "I see statistics for count of pets at the shelter, average shelter review rating and number of applications on file" do
+    user_1 = User.create!(
+      name: "Jake",
+      address: "222 1st St.",
+      city: "Denver",
+      state: "CO",
+      zip: "80202"
+    )
+    user_2 = User.create!(
+      name: "Joke",
+      address: "223 1st St.",
+      city: "Denver",
+      state: "CO",
+      zip: "80202"
+    )
+    user_3 = User.create!(
+      name: "Jerk",
+      address: "224 1st St.",
+      city: "Denver",
+      state: "CO",
+      zip: "80202"
+    )
+    shelter = Shelter.create(
+      name: "Denver Shelter",
+      address: "123 Main St.",
+      city: "Denver",
+      state: "CO",
+      zip: "80211"
+    )
+    pet_1 = Pet.create(
+      image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+      name: "Cosmo",
+      age: "8",
+      sex: "Male",
+      status: "Adoptable",
+      shelter: shelter
+    )
+    pet_2 = Pet.create(
+      image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+      name: "Zoey",
+      age: "9",
+      sex: "Female",
+      status: "Adoptable",
+      shelter: shelter
+    )
+    pet_3 = Pet.create(
+      image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+      name: "Ella",
+      age: "8",
+      sex: "Female",
+      status: "Adoptable",
+      shelter: shelter
+    )
+    application_1 = Application.create(
+      user: user_1,
+      status: "In Progress"
+    )
+    application_2 = Application.create(
+      user: user_2,
+      status: "In Progress"
+    )
+    application_3 = Application.create(
+      user: user_3,
+      status: "In Progress"
+    )
+    review_1 = Review.create(
+      title: "So good",
+      rating: 5,
+      content: "It's so good",
+      user: user_1,
+      shelter: shelter
+    )
+    review_2 = Review.create(
+      title: "Very good",
+      rating: 5,
+      content: "It's very good",
+      user: user_2,
+      shelter: shelter
+    )
+    review_3 = Review.create(
+      title: "Good",
+      rating: 4,
+      content: "It's good",
+      user: user_3,
+      shelter: shelter
+    )
+
+    visit "/shelters/#{shelter.id}"
+
+    expect(page).to have_content("Number of Pets at #{shelter.name}: #{shelter.total_pets}")
+    expect(page).to have_content("Average Review Rating at #{shelter.name}: #{shelter.average_reviews}")
+    expect(page).to have_content("Number of Applications on File at #{shelter.name}: #{shelter.total_applications}")
+  end
+end
