@@ -13,4 +13,10 @@ class Shelter < ApplicationRecord
     total_ratings = reviews.sum { |review| review.rating }
     total_ratings.to_f / reviews.count
   end
+
+  def total_applications
+    pets.map do |pet|
+      pet.applications
+    end.uniq.count
+  end
 end
