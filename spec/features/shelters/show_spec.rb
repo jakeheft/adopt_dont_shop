@@ -47,6 +47,107 @@ describe "When I visit a shelter show page I see a link to delete the shelter" d
   end
 end
 
+describe "As a visitor" do
+  describe "If a shelter has approved applications for any of their pets" do
+    it "I can not delete that shelter" do
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      shelter_2 = Shelter.create(
+        name: "Boulder Shelter",
+        address: "123 1st St.",
+        city: "Boulder",
+        state: "CO",
+        zip: "80211"
+      )
+      pet_1 = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "Cosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter_1
+      )
+      pet_2 = Pet.create(
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        name: "Zoey",
+        age: "9",
+        sex: "Female",
+        status: "Adoptable",
+        shelter: shelter_1
+      )
+      pet_3 = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "Mosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter_2
+      )
+      pet_4 = Pet.create(
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        name: "Moey",
+        age: "9",
+        sex: "Female",
+        status: "Adoptable",
+        shelter: shelter_2
+      )
+      user = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      application_1 = Application.create(
+        user: user,
+        status: "Pending"
+      )
+      application_2 = Application.create(
+        user: user,
+        status: "Rejected"
+      )
+      PetApplication.create(
+        pet: pet_1,
+        application: application_1,
+        pet_application_status: "Pending"
+      )
+      PetApplication.create(
+        pet: pet_2,
+        application: application_1,
+        pet_application_status: "Approved"
+      )
+      PetApplication.create(
+        pet: pet_3,
+        application: application_2,
+        pet_application_status: "Rejected"
+      )
+      PetApplication.create(
+        pet: pet_4,
+        application: application_2,
+        pet_application_status: "In Progress"
+      )
+      visit "/shelters/#{shelter_2.id}"
+
+      click_button "Delete Shelter"
+
+      expect(current_path).to eq("/shelters")
+      expect(page).to have_no_content(shelter_2.name)
+
+      visit "/shelters/#{shelter_1.id}"
+
+      click_button "Delete Shelter"
+
+      expect(page).to have_content("This shelter cannot be deleted. Where would the puppies go?!")
+    end
+  end
+end
+
+
 describe "As a visitor," do
   describe "When I visit a shelter's show page," do
     it "I see a list of reviews for that shelter containing review components" do
