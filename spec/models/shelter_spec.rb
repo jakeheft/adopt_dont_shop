@@ -105,5 +105,39 @@ RSpec.describe Shelter, type: :model do
 
       expect(shelter.average_reviews.round(4)).to eq(4.6667)
     end
+
+    it '#total_applications' do
+      user_1 = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      user_2 = User.create!(
+        name: "Joke",
+        address: "223 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      application_1 = Application.create(
+        user: user_1,
+        status: "In Progress"
+      )
+      application_2 = Application.create(
+        user: user_2,
+        status: "Pending"
+      )
+
+      expect(shelter.total_applications).to eq(2)
+    end
   end
 end
