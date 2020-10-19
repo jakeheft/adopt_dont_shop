@@ -14,7 +14,7 @@ class Shelter < ApplicationRecord
     total_ratings.to_f / reviews.count
   end
 
-  def total_applications
+  def total_applications # change to active record with (inner) join
     pets.map do |pet|
       pet.applications
     end.uniq.count
