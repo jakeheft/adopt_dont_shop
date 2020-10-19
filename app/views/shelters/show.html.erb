@@ -2,7 +2,9 @@
 
 <h1><%= @shelter.name %></h1>
 
-<h2><a href="/shelters/<%= "#{@shelter.id}" %>/pets">See our pets!</a></h2>
+<h4><%= @shelter.total_applications %> Applications Currently on File</h4>
+
+<h2><a href="/shelters/<%= "#{@shelter.id}" %>/pets">See our pets!</a> - We have <%= @shelter.total_pets %> right now!</h2>
 <p><%= "Name: #{@shelter.name}" %></p>
 <p><%= "Address: #{@shelter.address}" %></p>
 <p><%= "City: #{@shelter.city}" %></p>
@@ -16,6 +18,8 @@
 </form>
 
 <h2><%= "#{@shelter.name}'s Reviews" %></h2>
+
+<h4>Average Review Rating: <%= @shelter.average_reviews.round(2) %></h4>
 
 <%= link_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new" %>
 
