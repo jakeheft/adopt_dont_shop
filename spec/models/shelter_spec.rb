@@ -51,5 +51,59 @@ RSpec.describe Shelter, type: :model do
 
       expect(shelter.total_pets).to eq(3)
     end
+
+    it '#average_reviews' do
+      user_1 = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      user_2 = User.create!(
+        name: "Joke",
+        address: "223 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      user_3 = User.create!(
+        name: "Jerk",
+        address: "224 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      review_1 = Review.create(
+        title: "So good",
+        rating: 5,
+        content: "It's so good",
+        user: user_1,
+        shelter: shelter
+      )
+      review_2 = Review.create(
+        title: "Very good",
+        rating: 5,
+        content: "It's very good",
+        user: user_2,
+        shelter: shelter
+      )
+      review_3 = Review.create(
+        title: "Good",
+        rating: 4,
+        content: "It's good",
+        user: user_3,
+        shelter: shelter
+      )
+
+      expect(shelter.average_reviews.round(4)).to eq(4.6667)
+    end
   end
 end
