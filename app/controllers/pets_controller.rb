@@ -25,7 +25,13 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    Pet.destroy(params[:id])
-    redirect_to "/pets"
+    pet = Pet.find(params[:id])
+    if pet.application_needed?
+      redirect_to "/pets/#{pet.id}", notice: "This pet cannot be deleted because it is in the process of adoption"
+    else
+      pet.destroy_pet_apps
+      pet.destroy
+      redirect_to "/pets"
+    end
   end
 end
