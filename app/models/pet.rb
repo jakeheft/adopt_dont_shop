@@ -17,4 +17,10 @@ class Pet < ApplicationRecord
       application.status == "Approved"
     end
   end
+
+  def application_needed?
+    applications.any? do |application|
+      application.status == "Approved" || application.status == "Pending"
+    end
+  end
 end
