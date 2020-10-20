@@ -12,7 +12,7 @@
   <ul>
       <% @application.pets.each do |pet| # change this to iterate through @application.pet_applications %>
         <section id="pet-<%= pet.id %>">
-          <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
+          <li><a href="/pets/<%= pet.id %>"><%= pet.name.capitalize %></a></li>
           <% if PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Approved" %>
             <p>Approved</p>
           <% elsif PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Rejected" %>
