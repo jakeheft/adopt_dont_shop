@@ -33,9 +33,9 @@ class Shelter < ApplicationRecord
     pets.each do |pet|
       # move the next each block into pet model?
       pet.pet_applications.each do |app|
-        app.destroy!
+        app.destroy
       end
-      pet.destroy!
+      pet.destroy
     end
   end
 end

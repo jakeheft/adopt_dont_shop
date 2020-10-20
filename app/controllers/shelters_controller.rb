@@ -45,7 +45,7 @@ class SheltersController < ApplicationController
       redirect_to "/shelters/#{shelter.id}", notice: "This shelter cannot be deleted. Where would the puppies go?!"
     else
       shelter.destroy_associated_objects
-      shelter.destroy!
+      shelter.destroy
       redirect_to '/shelters'
     end
   end
