@@ -1,0 +1,15 @@
+
+<%= form_tag path do %>
+  <p><%= label_tag :name %></p>
+  <%= text_field_tag class_name %>
+  <p><%= label_tag :address %></p>
+  <%= text_field_tag class_address %>
+  <p><%= label_tag :city %></p>
+  <%= text_field_tag class_city %>
+  <p><%= label_tag :state %></p>
+  <%= text_field_tag class_state %>
+  <p><%= label_tag :zip %></p>
+  <%= text_field_tag class_zip %>
+
+  <div><%= submit_tag submit_text %></div>
+<% end %>
