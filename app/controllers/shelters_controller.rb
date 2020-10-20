@@ -41,7 +41,20 @@ class SheltersController < ApplicationController
   end
 
   def destroy
-    Shelter.destroy(params[:id])
-    redirect_to '/shelters'
+    shelter = Shelter.find(params[:id])
+    # binding.pry
+    if shelter.needed_pets?
+      redirect_to "/shelters/#{shelter.id}", notice: "This shelter cannot be deleted. Where would the puppies go?!"
+    else
+      shelter.pets.each do |pet|
+        pet.pet_applications.each do |app|
+          app.destroy!
+        end
+        pet.destroy!
+      end
+      # binding.pry
+      shelter.destroy!
+      redirect_to '/shelters'
+    end
   end
 end
