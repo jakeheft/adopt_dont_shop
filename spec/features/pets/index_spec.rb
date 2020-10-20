@@ -49,13 +49,13 @@ RSpec.describe "As a visitor" do
 
         click_link "Edit Pet"
 
-        expect(current_path).to eq("/pets/#{pet.id}")
+        expect(current_path).to eq("/pets/#{pet.id}/edit")
 
         visit "/shelters/#{shelter.id}/pets"
 
         click_link "Edit Pet"
 
-        expect(current_path).to eq("/pets/#{pet.id}")
+        expect(current_path).to eq("/pets/#{pet.id}/edit")
       end
     end
   end
