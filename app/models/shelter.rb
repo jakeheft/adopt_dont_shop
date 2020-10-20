@@ -21,20 +21,18 @@ class Shelter < ApplicationRecord
   end
 
   def needed_pets?# change to active record with (inner) join
+    app_statuses = []
     pets.any? do |pet|
-      app_statuses = pet.applications.map do |application|
-        application.status
+      pet.applications.each do |application|
+        app_statuses << application.status
       end
-      app_statuses.include?("Pending" || "Approved")
     end
+    app_statuses.include?("Pending") || app_statuses.include?("Approved")
   end
 
   def destroy_associated_objects
     pets.each do |pet|
-      # move the next each block into pet model?
-      pet.pet_applications.each do |app|
-        app.destroy
-      end
+      pet.destroy_pet_apps
       pet.destroy
     end
     reviews.each do |review|
