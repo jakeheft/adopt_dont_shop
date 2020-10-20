@@ -23,4 +23,10 @@ class Pet < ApplicationRecord
       application.status == "Approved" || application.status == "Pending"
     end
   end
+
+  def destroy_pet_apps
+    pet_applications.each do |app|
+      app.destroy
+    end
+  end
 end
