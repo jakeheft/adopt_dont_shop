@@ -257,5 +257,58 @@ RSpec.describe Shelter, type: :model do
       expect(shelter_1.needed_pets?).to eq(true)
       expect(shelter_2.needed_pets?).to eq(false)
     end
+
+    it "#destroy_associated_objects" do
+      shelter_1 = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      pet_1 = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "Cosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter_1
+      )
+      pet_2 = Pet.create(
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        name: "Zoey",
+        age: "9",
+        sex: "Female",
+        status: "Adoptable",
+        shelter: shelter_1
+      )
+      user = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      application_1 = Application.create(
+        user: user,
+        status: "Rejected"
+      )
+      pet_app_1 = PetApplication.create(
+        pet: pet_1,
+        application: application_1,
+        pet_application_status: "Rejected"
+      )
+      pet_app_2 = PetApplication.create(
+        pet: pet_2,
+        application: application_1,
+        pet_application_status: "Rejected"
+      )
+      shelter_1.destroy_associated_objects
+
+      expect(Pet.where(id: pet_1.id)).to eq([])
+      expect(Pet.where(id: pet_2.id)).to eq([])
+      expect(PetApplication.where(id: pet_app_1.id)).to eq([])
+      expect(PetApplication.where(id: pet_app_2.id)).to eq([])
+    end
   end
 end
