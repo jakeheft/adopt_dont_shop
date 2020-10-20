@@ -36,12 +36,17 @@ class SheltersController < ApplicationController
       state: params[:shelter_state],
       zip: params[:shelter_zip]
       })
-    shelter.save # unneccessary
     redirect_to "/shelters/#{shelter.id}"
   end
 
   def destroy
-    Shelter.destroy(params[:id])
-    redirect_to '/shelters'
+    shelter = Shelter.find(params[:id])
+    if shelter.needed_pets?
+      redirect_to "/shelters/#{shelter.id}", notice: "This shelter cannot be deleted. Where would the puppies go?!"
+    else
+      shelter.destroy_associated_objects
+      shelter.destroy
+      redirect_to '/shelters'
+    end
   end
 end

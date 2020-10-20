@@ -23,14 +23,16 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    review.update({
-      title: params[:title],
-      rating: params[:rating],
-      content: params[:content],
-      image: params[:image],
-      shelter_id: params[:shelter_id],
-      user: User.where(name: params[:username])[0]
-    })
+    user = User.where(name: params[:username])[0]
+    review.update(review_params.merge({user: user}))
+    # review.update({
+    #   title: params[:title],
+    #   rating: params[:rating],
+    #   content: params[:content],
+    #   image: params[:image],
+    #   shelter_id: params[:shelter_id],
+    #   user: User.where(name: params[:username])[0]
+    # })
     if review.title == "" || review.rating == "" || review.content == ""
       redirect_to "/shelters/#{review.shelter_id}/reviews/#{review.id}/edit", notice: "All fields except for image must be filled out."
     elsif review.user_id == nil
