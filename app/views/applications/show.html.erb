@@ -38,12 +38,16 @@
 
     <% if params[:pet_name] %>
       <% Pet.find_pets(params[:pet_name]).each do |pet| %>
-        <img src="<%= pet.image %>" style="height:250px; width:300px;">
-        <p><%= "Name: #{pet.name.capitalize}" %> <%= button_to "Adopt this Pet", "/pet_applications/#{pet.id}/#{@application.id}", method: :post %></p>
-        <p><%= "Description: #{pet.description}" %></p>
-        <p><%= "Age: #{pet.age}" %></p>
-        <p><%= "Sex: #{pet.sex}" %></p>
-        <p><%= "Adoption Status: #{pet.status}" %></p>
+        <section id="pet-<%= pet.id %>">
+          <% if !@application.pets.include? pet %>
+            <img src="<%= pet.image %>" style="height:250px; width:300px;">
+            <p><%= "Name: #{pet.name.capitalize}" %> <%= button_to "Adopt this Pet", "/pet_applications/#{pet.id}/#{@application.id}", method: :post %></p>
+            <p><%= "Description: #{pet.description}" %></p>
+            <p><%= "Age: #{pet.age}" %></p>
+            <p><%= "Sex: #{pet.sex}" %></p>
+            <p><%= "Adoption Status: #{pet.status}" %></p>
+          <% end %>
+        </section>
       <% end %>
     <% end %>
   <% end %>
