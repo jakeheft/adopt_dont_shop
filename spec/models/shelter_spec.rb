@@ -303,12 +303,30 @@ RSpec.describe Shelter, type: :model do
         application: application_1,
         pet_application_status: "Rejected"
       )
+      review_1 = Review.create!(
+        title: "Good Review",
+        rating: 5,
+        content: "It was good",
+        image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
+        user: user,
+        shelter: shelter_1
+      )
+      review_2 = Review.create!(
+        title: "Bad Review",
+        rating: 1,
+        content: "It was bad",
+        user: user,
+        shelter: shelter_1
+      )
+
       shelter_1.destroy_associated_objects
 
       expect(Pet.where(id: pet_1.id)).to eq([])
       expect(Pet.where(id: pet_2.id)).to eq([])
       expect(PetApplication.where(id: pet_app_1.id)).to eq([])
       expect(PetApplication.where(id: pet_app_2.id)).to eq([])
+      expect(Review.where(id: review_1.id)).to eq([])
+      expect(Review.where(id: review_2.id)).to eq([])
     end
   end
 end
