@@ -20,7 +20,7 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:app_id])
-    if params[:description] == "" || params[:description] == nil
+    if empty_description?
       redirect_to "/applications/#{application.id}", notice: "You must fill out a description to complete a submission."
     else
       application.update(
@@ -31,8 +31,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # private
-  # def application_params
-  #   params.permit(:description, :app_id)
-  # end
+  def empty_description?
+    params[:description] == "" || params[:description] == nil
+  end
 end
