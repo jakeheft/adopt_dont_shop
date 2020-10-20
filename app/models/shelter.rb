@@ -28,4 +28,14 @@ class Shelter < ApplicationRecord
       app_statuses.include?("Pending" || "Approved")
     end
   end
+
+  def destroy_associated_objects
+    pets.each do |pet|
+      # move the next each block into pet model?
+      pet.pet_applications.each do |app|
+        app.destroy!
+      end
+      pet.destroy!
+    end
+  end
 end
