@@ -148,6 +148,53 @@ describe "As a visitor" do
   end
 end
 
+describe "As a visitor" do
+  describe "When I delete a shelter" do
+    it "All reviews associated with that shelter are also deleted" do
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      user = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      review_1 = Review.create!(
+        title: "Good Review",
+        rating: 5,
+        content: "It was good",
+        image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80",
+        user: user,
+        shelter: shelter
+      )
+      review_2 = Review.create!(
+        title: "Bad Review",
+        rating: 1,
+        content: "It was bad",
+        user: user,
+        shelter: shelter
+      )
+
+      visit "/shelters/#{shelter.id}"
+
+      click_button "Delete Shelter"
+
+      expect(current_path).to eq("/shelters")
+
+      expect(page).to have_no_content(shelter.name)
+
+      expect(Review.where(id: review_1.id)).to eq([])
+      expect(Review.where(id: review_2.id)).to eq([])
+    end
+  end
+end
+
 
 describe "As a visitor," do
   describe "When I visit a shelter's show page," do
