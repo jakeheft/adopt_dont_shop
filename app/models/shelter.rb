@@ -37,5 +37,9 @@ class Shelter < ApplicationRecord
       end
       pet.destroy
     end
+    reviews.each do |review|
+      # move the next each block into review model?
+      review.destroy
+    end
   end
 end
