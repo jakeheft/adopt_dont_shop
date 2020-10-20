@@ -19,4 +19,13 @@ class Shelter < ApplicationRecord
       pet.applications
     end.uniq.count
   end
+
+  def needed_pets?# change to active record with (inner) join
+    pets.any? do |pet|
+      app_statuses = pet.applications.map do |application|
+        application.status
+      end
+      app_statuses.include?("Pending" || "Approved")
+    end
+  end
 end
