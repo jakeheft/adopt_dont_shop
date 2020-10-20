@@ -22,9 +22,4 @@ class PetApplicationsController < ApplicationController
 
     redirect_to "/admin/applications/#{params[:application_id]}"
   end
-
-  # private
-  # def pet_app_params
-  #   params.permit(:pet_id, :application_id)
-  # end
 end
