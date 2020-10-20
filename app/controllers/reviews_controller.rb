@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
   def update
     review = Review.find(params[:review_id])
     user = User.where(name: params[:username])[0]
-    review.update(review_params(user))
+    review.update(review_params.merge({user: user}))
     # review.update({
     #   title: params[:title],
     #   rating: params[:rating],
@@ -48,7 +48,7 @@ class ReviewsController < ApplicationController
   end
 
   private
-  def review_params(user)
-    params.permit(:title, :rating, :content, :image, :shelter_id).merge(user: user)
+  def review_params
+    params.permit(:title, :rating, :content, :image, :shelter_id)
   end
 end
