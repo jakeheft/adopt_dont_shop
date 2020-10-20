@@ -142,6 +142,7 @@ describe "As a visitor" do
 
       click_button "Delete Shelter"
 
+      expect(current_path).to eq("/shelters/#{shelter_1.id}")
       expect(page).to have_content("This shelter cannot be deleted. Where would the puppies go?!")
     end
   end
