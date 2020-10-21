@@ -9,11 +9,11 @@ class UsersController < ApplicationController
 
   def create
     user = User.create({
-      name: params[:user_name],
-      address: params[:user_address],
-      city: params[:user_city],
-      state: params[:user_state],
-      zip: params[:user_zip]
+      name: params[:name],
+      address: params[:address],
+      city: params[:city],
+      state: params[:state],
+      zip: params[:zip]
       })
     redirect_to "/users/#{user.id}"
     @users = User.all
