@@ -1,5 +1,3 @@
-<header><%= link_to 'Go to Shelters', '/shelters' %> <%= link_to 'Go to Pets', '/pets' %></header>
-
 <h1><%= @application.user.name %>'s Application</h1>
 
 <p>Address: <%= @application.user.full_address %></p>
@@ -14,12 +12,12 @@
   <ul>
       <% @application.pets.each do |pet| # change this to iterate through @application.pet_applications %>
         <section id="pet-<%= pet.id %>">
-          <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
+          <li><a href="/pets/<%= pet.id %>"><%= pet.name.capitalize %></a></li>
           <% if PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Approved" %>
             <p>Approved</p>
           <% elsif PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Rejected" %>
             <p>Rejected</p>
-          <% elsif pet.approved_anywhere? %>
+          <% elsif pet.status_anywhere?("Approved") %>
             <p>Already approved in another application</p>
           <% else %>
             <%= button_to "Approve Pet", "/pet_applications/#{pet.id}/#{@application.id}/approve", method: :patch %>

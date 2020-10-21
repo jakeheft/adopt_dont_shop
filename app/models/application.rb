@@ -5,20 +5,21 @@ class Application < ApplicationRecord
 
   validates_presence_of :user_id, :status
 
+  def contain_this?(status)
+    id = self.id
+    PetApplication.where(application_id: id).where(pet_application_status: status) != []
+  end
+
   def status_check
-    statuses = pet_applications.map do |pet_app|
-      pet_app.pet_application_status
-    end
-    if statuses.include?("Rejected")
+    if contain_this?("Rejected")
       self.update(status: "Rejected")
       self.status
-    elsif statuses.include?("Pending")
+    elsif contain_this?("Pending")
       self.update(status: "Pending")
       self.status
     else
       self.update(status: "Approved")
       self.status
-      # redirect_to "admin/applications/#{self.id}"
     end
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "As a visitor" do
   describe "When I visit '/pets/:id'" do
-    it describe "I see the pet with id including the pet's info" do
+    it "I see the pet with id including the pet's info" do
       shelter = Shelter.create(
         name: "Denver Shelter",
         address: "123 Main St.",
@@ -21,7 +21,6 @@ RSpec.describe "As a visitor" do
 
       expect(page).to have_xpath("//img[contains(@src, '#{pet.image}')]")
       expect(page).to have_content(pet.name)
-      expect(page).to have_content(pet.description)
       expect(page).to have_content(pet.age)
       expect(page).to have_content(pet.sex)
       expect(page).to have_content(pet.status)

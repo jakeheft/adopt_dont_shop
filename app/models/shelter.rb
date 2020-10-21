@@ -6,28 +6,21 @@ class Shelter < ApplicationRecord
   validates_presence_of :name, :address, :city, :state, :zip
 
   def total_pets
-    pets.count
+    pets.calculate(:count, :all)
   end
 
   def average_reviews
-    total_ratings = reviews.sum { |review| review.rating }
-    total_ratings.to_f / reviews.count
+    Review.where(shelter_id: id).average(:rating).to_f
   end
 
-  def total_applications # change to active record with (inner) join
-    pets.map do |pet|
-      pet.applications
-    end.uniq.count
+  def total_applications
+    pets.joins(:applications).select('applications.*').distinct.calculate(:count, :all)
   end
 
-  def needed_pets?# change to active record with (inner) join
-    app_statuses = []
+  def needed_pets?
     pets.any? do |pet|
-      pet.applications.each do |application|
-        app_statuses << application.status
-      end
+      pet.application_needed?
     end
-    app_statuses.include?("Pending") || app_statuses.include?("Approved")
   end
 
   def destroy_associated_objects

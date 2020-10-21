@@ -10,14 +10,14 @@ describe "When I visit the Shelter index page and click the link for 'New Shelte
 
       expect(current_path).to eq ("/shelters/new")
 
-      fill_in "shelter_name", with: "Ugly Pet Shelter"
-      fill_in "shelter_address", with: "234 Rodeo Dr."
-      fill_in "shelter_city", with: "Denver"
-      fill_in "shelter_state", with: "CO"
-      fill_in "shelter_zip", with: "88888"
+      fill_in :name, with: "Ugly Pet Shelter"
+      fill_in "address", with: "234 Rodeo Dr."
+      fill_in "city", with: "Denver"
+      fill_in "state", with: "CO"
+      fill_in "zip", with: "88888"
 
       click_button
-
+      
       expect(current_path).to eq ("/shelters")
       expect(page).to have_content("Ugly Pet Shelter")
     end

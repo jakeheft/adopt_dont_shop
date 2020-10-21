@@ -25,8 +25,8 @@ RSpec.describe "When I visit a Pet Show page" do
 
         expect(current_path).to eq("/pets/#{pet.id}/edit")
 
-        fill_in "pet_age", with: "7"
-        fill_in "pet_description", with: "Cute, cuddly, super awesome"
+        fill_in "age", with: "7"
+        fill_in "description", with: "Cute, cuddly, super awesome"
 
         click_button
 

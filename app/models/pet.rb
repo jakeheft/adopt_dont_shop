@@ -2,26 +2,19 @@ class Pet < ApplicationRecord
   belongs_to :shelter
   has_many :pet_applications
   has_many :applications, through: :pet_applications
-  # has_many :users, through: :applications
 
   validates_presence_of :image, :name, :age, :sex
 
   def self.find_pets(pet_name)
-    Pet.all.find_all do |pet|
-      pet.name.downcase.include?(pet_name.downcase)
-    end
+    Pet.where("name like ?", "%#{pet_name}%")
   end
 
-  def approved_anywhere?
-    applications.any? do |application|
-      application.status == "Approved"
-    end
+  def status_anywhere?(status)
+    self.applications.where(status: status) != []
   end
 
   def application_needed?
-    applications.any? do |application|
-      application.status == "Approved" || application.status == "Pending"
-    end
+    status_anywhere?("Approved") || status_anywhere?("Pending")
   end
 
   def destroy_pet_apps

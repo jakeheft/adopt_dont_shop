@@ -6,11 +6,11 @@ RSpec.describe "As a visitor" do
 
       visit "/users/new"
 
-      fill_in "user_name", with: "Jake"
-      fill_in "user_address", with: "222 1st St."
-      fill_in "user_city", with: "Denver"
-      fill_in "user_state", with: "CO"
-      fill_in "user_zip", with: "80202"
+      fill_in "name", with: "Jake"
+      fill_in "address", with: "222 1st St."
+      fill_in "city", with: "Denver"
+      fill_in "state", with: "CO"
+      fill_in "zip", with: "80202"
 
       click_button "Create User"
 

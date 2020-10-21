@@ -1,5 +1,3 @@
-<header><%= link_to 'Go to Shelters', '/shelters' %></header>
-
 <h1>Pets</h1>
 
 <%= link_to 'Start an Application', '/applications/new' %>
@@ -12,6 +10,6 @@
   <p><%= "Approximate Age: #{pet.age}" %></p>
   <p><%= "Sex: #{pet.sex}" %></p>
   <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter.name}" %></a></p>
-  <a href="/pets/<%= "#{pet.id}" %>">Edit Pet</a>
+  <%= link_to "Edit Pet", "/pets/#{pet.id}/edit"%>
   <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %><br><br><br><br>
 <% end %>

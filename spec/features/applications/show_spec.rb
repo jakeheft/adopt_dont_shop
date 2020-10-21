@@ -86,7 +86,7 @@ describe "As a visitor" do
           )
           pet_1 = Pet.create(
             image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-            name: "Cosmo",
+            name: "cosmo",
             age: "8",
             sex: "Male",
             status: "Adoptable",
@@ -94,7 +94,7 @@ describe "As a visitor" do
           )
           pet_2 = Pet.create(
             image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-            name: "Zoey",
+            name: "zoey",
             age: "9",
             sex: "Female",
             status: "Adoptable",
@@ -114,7 +114,7 @@ describe "As a visitor" do
           expect(current_path).to eq("/applications/#{application.id}")
 
           within '#add-pets' do
-            expect(page).to have_content(pet_2.name)
+            expect(page).to have_content(pet_2.name.capitalize)
           end
         end
       end
@@ -142,7 +142,7 @@ describe "As a visitor" do
         )
         pet_1 = Pet.create(
           image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-          name: "Cosmo",
+          name: "cosmo",
           age: "8",
           sex: "Male",
           status: "Adoptable",
@@ -150,7 +150,7 @@ describe "As a visitor" do
         )
         pet_2 = Pet.create(
           image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-          name: "Zoey",
+          name: "zoey",
           age: "9",
           sex: "Female",
           status: "Adoptable",
@@ -358,7 +358,7 @@ describe "As a visitor" do
         )
         pet_1 = Pet.create(
           image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-          name: "Cosmo",
+          name: "cosmo",
           age: "8",
           sex: "Male",
           status: "Adoptable",
@@ -366,7 +366,7 @@ describe "As a visitor" do
         )
         pet_2 = Pet.create(
           image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-          name: "Cosmopolis",
+          name: "cosmopolis",
           age: "9",
           sex: "Female",
           status: "Adoptable",
@@ -406,6 +406,125 @@ describe "As a visitor" do
         expect(page).to have_no_content("Zoey")
         expect(page).to have_no_content("Cosmo")
 
+      end
+    end
+  end
+end
+
+describe "As a visitor" do
+  describe "When I've created an application and am choosing pets" do
+    it "Once I add a pet, that pet will not appear in another Find Pets search" do
+      user = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      pet_1 = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "cosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter
+      )
+      pet_2 = Pet.create(
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        name: "zoey",
+        age: "9",
+        sex: "Female",
+        status: "Adoptable",
+        shelter: shelter
+      )
+      application = Application.create(
+        user: user,
+        status: "In Progress"
+      )
+
+      visit "/applications/#{application.id}"
+
+      fill_in "pet_name", with: "Cosmo"
+
+      click_button "Find Pets"
+
+      within "#pet-#{pet_1.id}" do
+        click_button "Adopt this Pet"
+      end
+
+      fill_in "pet_name", with: "Cosmo"
+
+      click_button "Find Pets"
+
+      within "#pet-#{pet_1.id}" do
+        expect(page).to have_no_content("Cosmo")
+      end
+    end
+  end
+end
+
+describe "As a visitor" do
+  describe "When I've created an application and am choosing pets" do
+    it "Once I add a pet, that pet will not appear in another Find Pets search" do
+      user = User.create!(
+        name: "Jake",
+        address: "222 1st St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80202"
+      )
+      shelter = Shelter.create(
+        name: "Denver Shelter",
+        address: "123 Main St.",
+        city: "Denver",
+        state: "CO",
+        zip: "80211"
+      )
+      pet = Pet.create(
+        image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
+        name: "cosmo",
+        age: "8",
+        sex: "Male",
+        status: "Adoptable",
+        shelter: shelter
+      )
+      pet_2 = Pet.create(
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        name: "zoey",
+        age: "9",
+        sex: "Female",
+        status: "Adoptable",
+        shelter: shelter
+      )
+      application_1 = Application.create(
+        user: user,
+        status: "In Progress"
+      )
+      application_2 = Application.create(
+        user: user,
+        status: "Approved"
+      )
+      PetApplication.create(
+        pet: pet,
+        application: application_2,
+        pet_application_status: "Approved"
+      )
+
+      visit "/applications/#{application_1.id}"
+
+      fill_in "pet_name", with: "Cosmo"
+
+      click_button "Find Pets"
+
+      within "#pet-#{pet.id}" do
+        expect(page).to have_no_content("Cosmo")
       end
     end
   end

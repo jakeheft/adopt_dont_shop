@@ -15,7 +15,7 @@ RSpec.describe Pet, type: :model do
   end
 
   describe 'instance methods' do
-    it '#approved_anywhere?' do
+    it '#status_anywhere?' do
       user_1 = User.create!(
         name: "Jake",
         address: "222 1st St.",
@@ -69,18 +69,17 @@ RSpec.describe Pet, type: :model do
         pet_application_status: "Approved"
       )
       PetApplication.create(
-        pet: pet_1,
-        application: application_2,
-        pet_application_status: "Pending"
-      )
-      PetApplication.create(
         pet: pet_2,
         application: application_2,
         pet_application_status: "Pending"
       )
 
-      expect(pet_1.approved_anywhere?).to eq(true)
-      expect(pet_2.approved_anywhere?).to eq(false)
+      expect(pet_1.status_anywhere?("Approved")).to eq(true)
+      expect(pet_2.status_anywhere?("Approved")).to eq(false)
+      expect(pet_1.status_anywhere?("Pending")).to eq(false)
+      expect(pet_2.status_anywhere?("Pending")).to eq(true)
+      expect(pet_1.status_anywhere?("Rejected")).to eq(false)
+      expect(pet_2.status_anywhere?("Rejected")).to eq(false)
 
     end
   end
@@ -96,7 +95,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_1 = Pet.create(
         image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-        name: "Cosmo",
+        name: "cosmo",
         age: "8",
         sex: "Male",
         status: "Adoptable",
@@ -104,7 +103,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_2 = Pet.create(
         image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-        name: "Zoey",
+        name: "zoey",
         age: "9",
         sex: "Female",
         status: "Adoptable",
@@ -112,7 +111,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_3 = Pet.create(
         image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-        name: "Zoey",
+        name: "zoey",
         age: "4",
         sex: "Female",
         status: "Adoptable",

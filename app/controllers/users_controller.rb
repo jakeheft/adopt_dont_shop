@@ -4,18 +4,15 @@ class UsersController < ApplicationController
   end
 
   def new
-
   end
 
   def create
-    user = User.create({
-      name: params[:user_name],
-      address: params[:user_address],
-      city: params[:user_city],
-      state: params[:user_state],
-      zip: params[:user_zip]
-      })
+    user = User.create(user_params)
     redirect_to "/users/#{user.id}"
-    @users = User.all
+  end
+
+  private
+  def user_params
+    params.permit(:name, :address, :city, :state, :zip)
   end
 end
