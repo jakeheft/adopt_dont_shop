@@ -15,7 +15,7 @@ RSpec.describe Pet, type: :model do
   end
 
   describe 'instance methods' do
-    it '#approved_anywhere?' do
+    it '#status_anywhere?' do
       user_1 = User.create!(
         name: "Jake",
         address: "222 1st St.",
@@ -69,18 +69,17 @@ RSpec.describe Pet, type: :model do
         pet_application_status: "Approved"
       )
       PetApplication.create(
-        pet: pet_1,
-        application: application_2,
-        pet_application_status: "Pending"
-      )
-      PetApplication.create(
         pet: pet_2,
         application: application_2,
         pet_application_status: "Pending"
       )
 
-      expect(pet_1.approved_anywhere?).to eq(true)
-      expect(pet_2.approved_anywhere?).to eq(false)
+      expect(pet_1.status_anywhere?("Approved")).to eq(true)
+      expect(pet_2.status_anywhere?("Approved")).to eq(false)
+      expect(pet_1.status_anywhere?("Pending")).to eq(false)
+      expect(pet_2.status_anywhere?("Pending")).to eq(true)
+      expect(pet_1.status_anywhere?("Rejected")).to eq(false)
+      expect(pet_2.status_anywhere?("Rejected")).to eq(false)
 
     end
   end
