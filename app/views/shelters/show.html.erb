@@ -23,11 +23,9 @@
 
 <% @shelter.reviews.each do |review| %>
   <section>
-    <section class="row-fluid" style="display:inline-block;">
-      <h4><%= "#{review.title}" %></h4>
+      <h2><%= "#{review.title}" %></h2>
       <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit" %></p>
       <p><%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete %></p>
-    </section>
     <p><%= "Reviewed by #{review.user.name}" %>
     <p><%= "#{review.rating}/5" %>
     <p><%= "#{review.content}" %><br><br>
