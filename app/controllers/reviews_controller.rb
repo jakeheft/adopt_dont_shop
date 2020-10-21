@@ -25,15 +25,7 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:review_id])
     user = User.where(name: params[:username])[0]
     review.update(review_params.merge({user: user}))
-    # review.update({
-    #   title: params[:title],
-    #   rating: params[:rating],
-    #   content: params[:content],
-    #   image: params[:image],
-    #   shelter_id: params[:shelter_id],
-    #   user: User.where(name: params[:username])[0]
-    # })
-    if review.title == "" || review.rating == "" || review.content == ""
+    if any_blank_fields?(review)
       redirect_to "/shelters/#{review.shelter_id}/reviews/#{review.id}/edit", notice: "All fields except for image must be filled out."
     elsif review.user_id == nil
       redirect_to "/shelters/#{review.shelter_id}/reviews/#{review.id}/edit", notice: "Please enter the name of a valid user"
@@ -45,6 +37,10 @@ class ReviewsController < ApplicationController
   def destroy
     Review.find(params[:review_id]).destroy
     redirect_to "/shelters/#{params[:shelter_id]}"
+  end
+
+  def any_blank_fields?(review)
+    review.title == "" || review.rating == "" || review.content == ""
   end
 
   private
