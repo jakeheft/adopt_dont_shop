@@ -19,11 +19,11 @@ RSpec.describe "As a visitor" do
 
           expect(current_path).to eq("/shelters/#{shelter.id}/pets/new")
 
-          fill_in "pet_image", with: "https://images.unsplash.com/photo-1524511751214-b0a384dd9afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2767&q=80"
-          fill_in "pet_name", with: "charlie"
-          fill_in "pet_description", with: "Wiley dog who loves to fetch"
-          fill_in "pet_age", with: "5"
-          fill_in "pet_sex", with: "Female"
+          fill_in "image", with: "https://images.unsplash.com/photo-1524511751214-b0a384dd9afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2767&q=80"
+          fill_in "name", with: "charlie"
+          fill_in "description", with: "Wiley dog who loves to fetch"
+          fill_in "age", with: "5"
+          fill_in "sex", with: "Female"
 
           click_button
 
