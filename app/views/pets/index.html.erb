@@ -5,11 +5,13 @@
 <h3><%= "There are no available pets" if @pets == [] %></h3>
 
 <% @pets.each do |pet| %>
-  <a href="/pets/<%= "#{pet.id}" %>"><img src="<%= pet.image %>" style="height:250px; width:300px;"></a>
-  <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
-  <p><%= "Approximate Age: #{pet.age}" %></p>
-  <p><%= "Sex: #{pet.sex}" %></p>
-  <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter.name}" %></a></p>
-  <%= link_to "Edit Pet", "/pets/#{pet.id}/edit"%>
-  <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %><br><br><br><br>
+  <section>
+    <a href="/pets/<%= "#{pet.id}" %>"><img src="<%= pet.image %>" style="height:250px; width:300px;"></a>
+    <h2><a href="/pets/<%= "#{pet.id}" %>"><%= "#{pet.name.capitalize}" %></a></h2>
+    <p><%= "Approximate Age: #{pet.age}" %></p>
+    <p><%= "Sex: #{pet.sex}" %></p>
+    <p>Shelter: <a href="/shelters/<%= "#{pet.shelter_id}" %>"><%= "#{pet.shelter.name}" %></a></p>
+    <%= link_to "Edit Pet", "/pets/#{pet.id}/edit"%>
+    <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %><br><br><br><br>
+  </section>
 <% end %>
