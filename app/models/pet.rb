@@ -10,9 +10,7 @@ class Pet < ApplicationRecord
   end
 
   def approved_anywhere?
-    applications.any? do |application|
-      application.status == "Approved"
-    end
+    self.applications.where(status: "Approved") != []
   end
 
   def application_needed?
