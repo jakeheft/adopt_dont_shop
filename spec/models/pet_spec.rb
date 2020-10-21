@@ -96,7 +96,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_1 = Pet.create(
         image: "https://images.unsplash.com/photo-1455526050980-d3e7b9b789a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1525&q=80",
-        name: "Cosmo",
+        name: "cosmo",
         age: "8",
         sex: "Male",
         status: "Adoptable",
@@ -104,7 +104,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_2 = Pet.create(
         image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-        name: "Zoey",
+        name: "zoey",
         age: "9",
         sex: "Female",
         status: "Adoptable",
@@ -112,7 +112,7 @@ RSpec.describe Pet, type: :model do
       )
       pet_3 = Pet.create(
         image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-        name: "Zoey",
+        name: "zoey",
         age: "4",
         sex: "Female",
         status: "Adoptable",
