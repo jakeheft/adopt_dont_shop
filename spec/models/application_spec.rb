@@ -61,12 +61,25 @@ RSpec.describe Application, type: :model do
       status: "Adoptable",
       shelter: shelter
     )
+    pet_5 = Pet.create(
+      image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+      name: "Moey",
+      age: "9",
+      sex: "Female",
+      status: "Adoptable",
+      shelter: shelter
+    )
     application_1 = Application.create(
       user: user,
       description: "I am awesome",
       status: "Pending"
     )
     application_2 = Application.create(
+      user: user,
+      description: "I am more awesome",
+      status: "Pending"
+    )
+    application_3 = Application.create(
       user: user,
       description: "I am more awesome",
       status: "Pending"
@@ -91,11 +104,18 @@ RSpec.describe Application, type: :model do
       application: application_2,
       pet_application_status: "Rejected"
     )
+    PetApplication.create(
+      pet: pet_5,
+      application: application_3,
+      pet_application_status: "Pending"
+    )
 
     expect(application_1.status_check).to eq("Approved")
     expect(application_1.status).to eq("Approved")
     expect(application_2.status_check).to eq("Rejected")
     expect(application_2.status).to eq("Rejected")
+    expect(application_3.status_check).to eq("Pending")
+    expect(application_3.status).to eq("Pending")
     end
   end
 end
