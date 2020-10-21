@@ -17,7 +17,7 @@
             <p>Approved</p>
           <% elsif PetApplication.retrieve(pet.id, @application.id).pet_application_status == "Rejected" %>
             <p>Rejected</p>
-          <% elsif pet.approved_anywhere? %>
+          <% elsif pet.status_anywhere?("Approved") %>
             <p>Already approved in another application</p>
           <% else %>
             <%= button_to "Approve Pet", "/pet_applications/#{pet.id}/#{@application.id}/approve", method: :patch %>

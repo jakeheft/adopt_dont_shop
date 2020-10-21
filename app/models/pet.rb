@@ -9,14 +9,12 @@ class Pet < ApplicationRecord
     Pet.where("name like ?", "%#{pet_name}%")
   end
 
-  def approved_anywhere?
-    self.applications.where(status: "Approved") != []
+  def status_anywhere?(status)
+    self.applications.where(status: status) != []
   end
 
   def application_needed?
-    applications.any? do |application|
-      application.status == "Approved" || application.status == "Pending"
-    end
+    status_anywhere?("Approved") || status_anywhere?("Pending")
   end
 
   def destroy_pet_apps
