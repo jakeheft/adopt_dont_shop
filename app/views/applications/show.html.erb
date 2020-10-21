@@ -37,7 +37,7 @@
     <% end %>
 
     <% if params[:pet_name] %>
-      <% Pet.find_pets(params[:pet_name]).each do |pet| %>
+      <% Pet.find_pets(params[:pet_name].downcase).each do |pet| %>
         <section id="pet-<%= pet.id %>">
           <% if !@application.pets.include?(pet) && !pet.approved_anywhere? %>
             <img src="<%= pet.image %>" style="height:250px; width:300px;">
