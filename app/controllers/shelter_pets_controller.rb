@@ -1,7 +1,6 @@
 class ShelterPetsController < ApplicationController
   def index
     @shelter = Shelter.find(params[:id])
-    @pets = Pet.all ## don't use this, but rather call @shelter.pets in your views
   end
 
   def new
