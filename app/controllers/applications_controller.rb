@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   def show
-    @application = Application.find(params[:app_id])
+    @application = Application.find(params[:id])
   end
 
   def new
@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    application = Application.find(params[:app_id])
+    application = Application.find(params[:id])
     if empty_description?
       redirect_to "/applications/#{application.id}", notice: "You must fill out a description to complete a submission."
     else

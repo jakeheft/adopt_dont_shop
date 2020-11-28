@@ -2,27 +2,19 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #do I want the following (per odin project)
-  # root to: "welcome#index"
-  get '/', to: 'welcome#index'
-  get '/shelters', to: 'shelters#index'
-  get '/shelters/new', to: 'shelters#new'
-  post '/shelters', to: 'shelters#create'
-  get '/shelters/:id', to: 'shelters#show'
-  get '/shelters/:id/edit', to: 'shelters#edit'
-  patch '/shelters/:id', to: 'shelters#update'
-  delete '/shelters/:id', to: 'shelters#destroy'
+  root to: "welcome#index"
 
-  get '/pets', to: 'pets#index'
-  get '/pets/:id', to: 'pets#show'
-  get '/pets/:id/edit', to: 'pets#edit'
-  patch '/pets/:id', to: 'pets#update'
-  delete '/pets/:id', to: 'pets#destroy'
+  resources :shelters
+
+  resources :pets
 
   get '/pets/:pet_id/applications', to: 'pet_applications#index'
 
-  get '/shelters/:id/pets', to: 'shelter_pets#index'
-  get '/shelters/:shelter_id/pets/new', to: 'shelter_pets#new'
-  post '/shelters/:shelter_id/pets', to: 'shelter_pets#create'
+  namespace :shelters do
+    get '/:id/pets', to: 'pets#index'
+    get '/:shelter_id/pets/new', to: 'pets#new'
+    post '/:shelter_id/pets', to: 'pets#create'
+  end
 
   get '/shelters/:shelter_id/reviews/new', to: 'reviews#new'
   post '/shelters/:shelter_id', to: 'reviews#create'
@@ -30,15 +22,9 @@ Rails.application.routes.draw do
   patch '/shelters/:shelter_id/reviews/:review_id', to: 'reviews#update'
   delete '/shelters/:shelter_id/reviews/:review_id', to: 'reviews#destroy'
 
-  get '/users/new', to: 'users#new'
-  post '/users/', to: 'users#create'
-  get '/users/:id', to: 'users#show'
+  resources :users, only: %i[new create show]
 
-  get '/applications/new', to: 'applications#new'
-  post '/applications', to: 'applications#create'
-  get '/applications/:app_id', to: 'applications#show'
-  patch '/applications/:app_id', to: 'applications#update'
-
+  resources :applications, only: %i[new create show update]
 
   post '/pet_applications/:pet_id/:application_id', to: 'pet_applications#create'
   patch '/pet_applications/:pet_id/:application_id/:response', to: 'pet_applications#update'
